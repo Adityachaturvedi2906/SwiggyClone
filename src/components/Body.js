@@ -100,7 +100,7 @@ const Body = () => {
         <h2 className=" text-black font-bold text-2xl">{foodCarousel.header.title}</h2>
         <div className="overflow-x-auto whitespace-no-wrap custom-scrollbar">
           <div className="flex p-6">
-            {foodCarousel && foodCarousel.imageGridCards.info?.map((food) => (
+            {foodCarousel && foodCarousel?.imageGridCards?.info?.map((food) => (
               <div key={food.id} className="flex-shrink-0">
                 <Link to={food.action.link}>
                   <img alt={food.accessibility.altText} src={`https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_288,h_360/${food.imageId}`} className="w-44 h-52 p-4 object-cover" />
