@@ -8,6 +8,7 @@ const Body = () => {
   const [usingResList, setUsingResList] = useState([]);
   const [filteredRes, setFilteredRes] = useState([])
   const [foodCarousel, setFoodCarousel] = useState([])
+  const [bestOffers, setBestOffers] = useState([])
   const [pureVeg, setPureVeg] = useState("Pure Veg")
   const [ratings, setRatings] = useState("Ratings 4.0+")
   const [priceList, setPriceList] = useState("Rs. 300-Rs. 600")
@@ -24,13 +25,14 @@ const Body = () => {
 
     const json = await data1.json();
     setUsingResList(
-      json?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants);
+      json?.data?.cards[2]?.card?.card?.gridElements?.infoWithStyle?.restaurants);
     setFilteredRes(
-      json?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants);
-    setFoodCarousel(json?.data?.cards[0]?.card?.card);
+      json?.data?.cards[2]?.card?.card?.gridElements?.infoWithStyle?.restaurants);
+    setFoodCarousel(json?.data?.cards[1]?.card?.card);
+    setBestOffers(json?.data?.cards[0]?.card?.card)
   };
 
-  console.log(foodCarousel);
+  console.log(usingResList);
   // data.cards[0].card.card.gridElements.infoWithStyle.info
 
   const handlePureVeg = () => {
@@ -92,24 +94,42 @@ const Body = () => {
 
   // console.log(usingResList);
 
-  return usingResList?.length === 0 ? (
+  return usingResList?.length === 0 ?
     <Shimmer />
-  ) : (
+    :
     <div className="mx-auto w-full sm:w-3/4 lg:w-3/4 xl:w-4/5">
-      <div className="border-b-2">
-        <h2 className=" text-black font-bold text-2xl">{foodCarousel.header.title}</h2>
-        <div className="overflow-x-auto whitespace-no-wrap custom-scrollbar">
-          <div className="flex p-6">
-            {foodCarousel && foodCarousel?.imageGridCards?.info?.map((food) => (
-              <div key={food.id} className="flex-shrink-0">
-                <Link to={food.action.link}>
-                  <img alt={food.accessibility.altText} src={`https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_288,h_360/${food.imageId}`} className="w-44 h-52 p-4 object-cover" />
-                </Link>
-              </div>
-            ))}
+      {bestOffers &&
+        <div>
+          <h2 className=" text-black font-bold text-2xl">Best offers for you</h2>
+          <div className="overflow-x-auto whitespace-no-wrap custom-scrollbar">
+            <div className="flex p-6">
+              {bestOffers && bestOffers?.imageGridCards?.info?.map((best) => (
+                <div key={best.id} className="flex-shrink-0">
+                  <Link to={best.action.link} >
+                    <img alt={best.accessibility.altText} src={`https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_288,h_360/${best.imageId}`} className="p-3 h-64 w-[27rem]" />
+                  </Link>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>}
+
+      {foodCarousel &&
+        <div className="border-b-2">
+          <h2 className=" text-black font-bold text-2xl">{foodCarousel.header.title}</h2>
+          <div className="overflow-x-auto whitespace-no-wrap custom-scrollbar">
+            <div className="flex p-6">
+              {foodCarousel && foodCarousel?.imageGridCards?.info?.map((food) => (
+                <div key={food.id} className="flex-shrink-0">
+                  <Link to={food.action.link}>
+                    <img alt={food.accessibility.altText} src={`https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_288,h_360/${food.imageId}`} className="w-44 h-52 p-4 object-cover" />
+                  </Link>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
-      </div>
+      }
 
       <h2 className=" text-black font-bold text-2xl pt-6">Restaurants with online food delivery in Bhopal</h2>
       <div className="flex items-center gap-2">
@@ -168,7 +188,6 @@ const Body = () => {
         ))}
       </div>
     </div>
-  );
 };
 
 export default Body;
