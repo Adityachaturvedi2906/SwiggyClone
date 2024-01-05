@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom"
+import data from '../utils/data.json'
 import RestaurantCard from "./RestaurantCard";
 import Shimmer from "./Shimmer";
 // import useOnlineStatus from "../utils/useOnlinestatus";
@@ -19,20 +20,14 @@ const Body = () => {
   }, []);
 
   const fetchData = async () => {
-    const data1 = await fetch(
-      "https://www.swiggy.com/dapi/restaurants/list/v5?lat=23.2599333&lng=77.412615&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING"
-    );
-
-    const json = await data1.json();
     setUsingResList(
-      json?.data?.cards[2]?.card?.card?.gridElements?.infoWithStyle?.restaurants);
+      data?.cards[2]?.card?.card?.gridElements?.infoWithStyle?.restaurants);
     setFilteredRes(
-      json?.data?.cards[2]?.card?.card?.gridElements?.infoWithStyle?.restaurants);
-    setFoodCarousel(json?.data?.cards[1]?.card?.card);
-    setBestOffers(json?.data?.cards[0]?.card?.card)
+      data?.cards[2]?.card?.card?.gridElements?.infoWithStyle?.restaurants);
+    setFoodCarousel(data?.cards[1]?.card?.card);
+    setBestOffers(data?.cards[0]?.card?.card)
   };
 
-  console.log(usingResList);
   // data.cards[0].card.card.gridElements.infoWithStyle.info
 
   const handlePureVeg = () => {
@@ -191,8 +186,3 @@ const Body = () => {
 };
 
 export default Body;
-
-
-
-// v1674029850/PC_Creative%20refresh/3D_bau/banners_new/Dosa.png
-// https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_288,h_360/v1674029850/PC_Creative%20refresh/3D_bau/banners_new/Dosa.png

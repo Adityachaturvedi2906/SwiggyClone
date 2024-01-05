@@ -35042,6 +35042,8 @@ parcelHelpers.defineInteropFlag(exports);
 var _jsxDevRuntime = require("react/jsx-dev-runtime");
 var _react = require("react");
 var _reactRouterDom = require("react-router-dom");
+var _dataJson = require("../utils/data.json");
+var _dataJsonDefault = parcelHelpers.interopDefault(_dataJson);
 var _restaurantCard = require("./RestaurantCard");
 var _restaurantCardDefault = parcelHelpers.interopDefault(_restaurantCard);
 var _shimmer = require("./Shimmer");
@@ -35053,6 +35055,7 @@ const Body = ()=>{
     const [usingResList, setUsingResList] = (0, _react.useState)([]);
     const [filteredRes, setFilteredRes] = (0, _react.useState)([]);
     const [foodCarousel, setFoodCarousel] = (0, _react.useState)([]);
+    const [bestOffers, setBestOffers] = (0, _react.useState)([]);
     const [pureVeg, setPureVeg] = (0, _react.useState)("Pure Veg");
     const [ratings, setRatings] = (0, _react.useState)("Ratings 4.0+");
     const [priceList, setPriceList] = (0, _react.useState)("Rs. 300-Rs. 600");
@@ -35062,13 +35065,11 @@ const Body = ()=>{
         fetchData();
     }, []);
     const fetchData = async ()=>{
-        const data1 = await fetch("https://www.swiggy.com/dapi/restaurants/list/v5?lat=23.2599333&lng=77.412615&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING");
-        const json = await data1.json();
-        setUsingResList(json?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants);
-        setFilteredRes(json?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants);
-        setFoodCarousel(json?.data?.cards[0]?.card?.card);
+        setUsingResList((0, _dataJsonDefault.default)?.cards[2]?.card?.card?.gridElements?.infoWithStyle?.restaurants);
+        setFilteredRes((0, _dataJsonDefault.default)?.cards[2]?.card?.card?.gridElements?.infoWithStyle?.restaurants);
+        setFoodCarousel((0, _dataJsonDefault.default)?.cards[1]?.card?.card);
+        setBestOffers((0, _dataJsonDefault.default)?.cards[0]?.card?.card);
     };
-    console.log(foodCarousel);
     // data.cards[0].card.card.gridElements.infoWithStyle.info
     const handlePureVeg = ()=>{
         if (pureVeg !== "Pure Veg") {
@@ -35121,12 +35122,65 @@ const Body = ()=>{
     // console.log(usingResList);
     return usingResList?.length === 0 ? /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _shimmerDefault.default), {}, void 0, false, {
         fileName: "src/components/Body.js",
-        lineNumber: 96,
+        lineNumber: 93,
         columnNumber: 5
     }, undefined) : /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
         className: "mx-auto w-full sm:w-3/4 lg:w-3/4 xl:w-4/5",
         children: [
-            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+            bestOffers && /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                children: [
+                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("h2", {
+                        className: " text-black font-bold text-2xl",
+                        children: "Best offers for you"
+                    }, void 0, false, {
+                        fileName: "src/components/Body.js",
+                        lineNumber: 98,
+                        columnNumber: 11
+                    }, undefined),
+                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                        className: "overflow-x-auto whitespace-no-wrap custom-scrollbar",
+                        children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                            className: "flex p-6",
+                            children: bestOffers && bestOffers?.imageGridCards?.info?.map((best)=>/*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                                    className: "flex-shrink-0",
+                                    children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactRouterDom.Link), {
+                                        to: best.action.link,
+                                        children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("img", {
+                                            alt: best.accessibility.altText,
+                                            src: `https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_288,h_360/${best.imageId}`,
+                                            className: "p-3 h-64 w-[27rem]"
+                                        }, void 0, false, {
+                                            fileName: "src/components/Body.js",
+                                            lineNumber: 104,
+                                            columnNumber: 21
+                                        }, undefined)
+                                    }, void 0, false, {
+                                        fileName: "src/components/Body.js",
+                                        lineNumber: 103,
+                                        columnNumber: 19
+                                    }, undefined)
+                                }, best.id, false, {
+                                    fileName: "src/components/Body.js",
+                                    lineNumber: 102,
+                                    columnNumber: 17
+                                }, undefined))
+                        }, void 0, false, {
+                            fileName: "src/components/Body.js",
+                            lineNumber: 100,
+                            columnNumber: 13
+                        }, undefined)
+                    }, void 0, false, {
+                        fileName: "src/components/Body.js",
+                        lineNumber: 99,
+                        columnNumber: 11
+                    }, undefined)
+                ]
+            }, void 0, true, {
+                fileName: "src/components/Body.js",
+                lineNumber: 97,
+                columnNumber: 9
+            }, undefined),
+            foodCarousel && /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
                 className: "border-b-2",
                 children: [
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("h2", {
@@ -35134,8 +35188,8 @@ const Body = ()=>{
                         children: foodCarousel.header.title
                     }, void 0, false, {
                         fileName: "src/components/Body.js",
-                        lineNumber: 100,
-                        columnNumber: 9
+                        lineNumber: 114,
+                        columnNumber: 11
                     }, undefined),
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
                         className: "overflow-x-auto whitespace-no-wrap custom-scrollbar",
@@ -35151,41 +35205,41 @@ const Body = ()=>{
                                             className: "w-44 h-52 p-4 object-cover"
                                         }, void 0, false, {
                                             fileName: "src/components/Body.js",
-                                            lineNumber: 106,
-                                            columnNumber: 19
+                                            lineNumber: 120,
+                                            columnNumber: 21
                                         }, undefined)
                                     }, void 0, false, {
                                         fileName: "src/components/Body.js",
-                                        lineNumber: 105,
-                                        columnNumber: 17
+                                        lineNumber: 119,
+                                        columnNumber: 19
                                     }, undefined)
                                 }, food.id, false, {
                                     fileName: "src/components/Body.js",
-                                    lineNumber: 104,
-                                    columnNumber: 15
+                                    lineNumber: 118,
+                                    columnNumber: 17
                                 }, undefined))
                         }, void 0, false, {
                             fileName: "src/components/Body.js",
-                            lineNumber: 102,
-                            columnNumber: 11
+                            lineNumber: 116,
+                            columnNumber: 13
                         }, undefined)
                     }, void 0, false, {
                         fileName: "src/components/Body.js",
-                        lineNumber: 101,
-                        columnNumber: 9
+                        lineNumber: 115,
+                        columnNumber: 11
                     }, undefined)
                 ]
             }, void 0, true, {
                 fileName: "src/components/Body.js",
-                lineNumber: 99,
-                columnNumber: 7
+                lineNumber: 113,
+                columnNumber: 9
             }, undefined),
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("h2", {
                 className: " text-black font-bold text-2xl pt-6",
                 children: "Restaurants with online food delivery in Bhopal"
             }, void 0, false, {
                 fileName: "src/components/Body.js",
-                lineNumber: 114,
+                lineNumber: 129,
                 columnNumber: 7
             }, undefined),
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -35201,12 +35255,12 @@ const Body = ()=>{
                             children: ratings
                         }, void 0, false, {
                             fileName: "src/components/Body.js",
-                            lineNumber: 117,
+                            lineNumber: 132,
                             columnNumber: 11
                         }, undefined)
                     }, void 0, false, {
                         fileName: "src/components/Body.js",
-                        lineNumber: 116,
+                        lineNumber: 131,
                         columnNumber: 9
                     }, undefined),
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -35219,12 +35273,12 @@ const Body = ()=>{
                             children: pureVeg
                         }, void 0, false, {
                             fileName: "src/components/Body.js",
-                            lineNumber: 127,
+                            lineNumber: 142,
                             columnNumber: 11
                         }, undefined)
                     }, void 0, false, {
                         fileName: "src/components/Body.js",
-                        lineNumber: 126,
+                        lineNumber: 141,
                         columnNumber: 9
                     }, undefined),
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -35237,12 +35291,12 @@ const Body = ()=>{
                             children: priceList
                         }, void 0, false, {
                             fileName: "src/components/Body.js",
-                            lineNumber: 137,
+                            lineNumber: 152,
                             columnNumber: 11
                         }, undefined)
                     }, void 0, false, {
                         fileName: "src/components/Body.js",
-                        lineNumber: 136,
+                        lineNumber: 151,
                         columnNumber: 9
                     }, undefined),
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -35255,18 +35309,18 @@ const Body = ()=>{
                             children: lessPriceList
                         }, void 0, false, {
                             fileName: "src/components/Body.js",
-                            lineNumber: 147,
+                            lineNumber: 162,
                             columnNumber: 11
                         }, undefined)
                     }, void 0, false, {
                         fileName: "src/components/Body.js",
-                        lineNumber: 146,
+                        lineNumber: 161,
                         columnNumber: 9
                     }, undefined)
                 ]
             }, void 0, true, {
                 fileName: "src/components/Body.js",
-                lineNumber: 115,
+                lineNumber: 130,
                 columnNumber: 7
             }, undefined),
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -35277,36 +35331,35 @@ const Body = ()=>{
                             resData: res
                         }, void 0, false, {
                             fileName: "src/components/Body.js",
-                            lineNumber: 163,
+                            lineNumber: 178,
                             columnNumber: 15
                         }, undefined) : /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _restaurantCardDefault.default), {
                             resData: res
                         }, void 0, false, {
                             fileName: "src/components/Body.js",
-                            lineNumber: 165,
+                            lineNumber: 180,
                             columnNumber: 15
                         }, undefined)
                     }, res.info.id, false, {
                         fileName: "src/components/Body.js",
-                        lineNumber: 159,
+                        lineNumber: 174,
                         columnNumber: 11
                     }, undefined))
             }, void 0, false, {
                 fileName: "src/components/Body.js",
-                lineNumber: 157,
+                lineNumber: 172,
                 columnNumber: 7
             }, undefined)
         ]
     }, void 0, true, {
         fileName: "src/components/Body.js",
-        lineNumber: 98,
+        lineNumber: 95,
         columnNumber: 5
     }, undefined);
 };
-_s(Body, "wqPKGwc1/+jIWPN4JBC80DXhTqk=");
+_s(Body, "uFG3hZV6RlYl7dFWW2Y2n1ZEA7E=");
 _c = Body;
-exports.default = Body; // v1674029850/PC_Creative%20refresh/3D_bau/banners_new/Dosa.png
- // https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_288,h_360/v1674029850/PC_Creative%20refresh/3D_bau/banners_new/Dosa.png
+exports.default = Body;
 var _c;
 $RefreshReg$(_c, "Body");
 
@@ -35315,7 +35368,7 @@ $RefreshReg$(_c, "Body");
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","react-router-dom":"9xmpe","./RestaurantCard":"bMboU","./Shimmer":"g6ZGj","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru"}],"bMboU":[function(require,module,exports) {
+},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","react-router-dom":"9xmpe","./RestaurantCard":"bMboU","./Shimmer":"g6ZGj","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru","../utils/data.json":"kGloa"}],"bMboU":[function(require,module,exports) {
 var $parcel$ReactRefreshHelpers$ffb1 = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
 var prevRefreshReg = window.$RefreshReg$;
 var prevRefreshSig = window.$RefreshSig$;
@@ -35329,9 +35382,8 @@ var _constants = require("../utils/constants");
 const RestaurantCard = (props)=>{
     const { resData } = props;
     const { cloudinaryImageId, name, areaName, avgRating, cuisines, aggregatedDiscountInfoV3, sla } = resData?.info;
-    // console.log(resData);
     return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
-        className: "m-4  rounded-lg hover:transform hover:scale-95 hover:duration-300 font-sans md:w-[13.5rem] lg:w-[17rem] lg:h-72",
+        className: "m-4 rounded-lg hover:transform hover:scale-95 hover:duration-300 font-sans sm:w-[13.5rem] md:w-[15rem] lg:w-[11rem] xl:w-[17rem]",
         children: [
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
                 className: "relative",
@@ -35343,35 +35395,35 @@ const RestaurantCard = (props)=>{
                             children: aggregatedDiscountInfoV3.header + " " + aggregatedDiscountInfoV3.subHeader
                         }, void 0, false, {
                             fileName: "src/components/RestaurantCard.js",
-                            lineNumber: 21,
+                            lineNumber: 20,
                             columnNumber: 7
                         }, undefined)
                     }, void 0, false, {
                         fileName: "src/components/RestaurantCard.js",
-                        lineNumber: 19,
+                        lineNumber: 18,
                         columnNumber: 5
                     }, undefined),
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("img", {
-                        className: "rounded-2xl  shadow-xl object-cover md:h-36 lg:h-44 lg:w-80",
+                        className: "rounded-2xl shadow-xl object-cover h-[13rem] md:h-[9rem] lg:h-[11rem]  w-full",
                         alt: "res-logo",
                         src: (0, _constants.IMG_URL) + cloudinaryImageId
                     }, void 0, false, {
                         fileName: "src/components/RestaurantCard.js",
-                        lineNumber: 25,
+                        lineNumber: 24,
                         columnNumber: 5
                     }, undefined)
                 ]
             }, void 0, true, {
                 fileName: "src/components/RestaurantCard.js",
-                lineNumber: 18,
+                lineNumber: 17,
                 columnNumber: 4
             }, undefined),
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("h2", {
-                className: "px-2  pt-2 font-semibold text-base whitespace-nowrap overflow-hidden text-ellipsis text-[#02060cbf]",
+                className: "px-2 pt-2 font-semibold text-base whitespace-nowrap overflow-hidden text-ellipsis text-[#02060cbf]",
                 children: name
             }, void 0, false, {
                 fileName: "src/components/RestaurantCard.js",
-                lineNumber: 31,
+                lineNumber: 30,
                 columnNumber: 4
             }, undefined),
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -35379,15 +35431,15 @@ const RestaurantCard = (props)=>{
                 children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("h2", {
                     className: "flex items-center px-2 py-1 font-semibold text-base text-[#02060cbf]",
                     children: [
-                        avgRating ? /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _jsxDevRuntime.Fragment), {
+                        avgRating && /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _jsxDevRuntime.Fragment), {
                             children: [
                                 /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("img", {
                                     src: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ_7Fr5mvXOExMGPyl7cZmCC1xNata89iCo05VYiUf75g&s",
                                     className: "w-4 h-4 object-cover rounded-lg mr-1",
-                                    alt: "Description of the image"
+                                    alt: "Rating"
                                 }, void 0, false, {
                                     fileName: "src/components/RestaurantCard.js",
-                                    lineNumber: 36,
+                                    lineNumber: 35,
                                     columnNumber: 8
                                 }, undefined),
                                 avgRating,
@@ -35397,22 +35449,22 @@ const RestaurantCard = (props)=>{
                                     children: "\xb7"
                                 }, void 0, false, {
                                     fileName: "src/components/RestaurantCard.js",
-                                    lineNumber: 42,
+                                    lineNumber: 41,
                                     columnNumber: 8
                                 }, undefined)
                             ]
-                        }, void 0, true) : null,
+                        }, void 0, true),
                         sla.deliveryTime,
                         " mins"
                     ]
                 }, void 0, true, {
                     fileName: "src/components/RestaurantCard.js",
-                    lineNumber: 33,
+                    lineNumber: 32,
                     columnNumber: 5
                 }, undefined)
             }, void 0, false, {
                 fileName: "src/components/RestaurantCard.js",
-                lineNumber: 32,
+                lineNumber: 31,
                 columnNumber: 4
             }, undefined),
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("h4", {
@@ -35420,7 +35472,7 @@ const RestaurantCard = (props)=>{
                 children: cuisines.join(", ")
             }, void 0, false, {
                 fileName: "src/components/RestaurantCard.js",
-                lineNumber: 50,
+                lineNumber: 47,
                 columnNumber: 4
             }, undefined),
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("h3", {
@@ -35428,27 +35480,17 @@ const RestaurantCard = (props)=>{
                 children: areaName
             }, void 0, false, {
                 fileName: "src/components/RestaurantCard.js",
-                lineNumber: 51,
+                lineNumber: 48,
                 columnNumber: 4
             }, undefined)
         ]
     }, void 0, true, {
         fileName: "src/components/RestaurantCard.js",
-        lineNumber: 17,
+        lineNumber: 16,
         columnNumber: 3
     }, undefined);
 };
 _c = RestaurantCard;
-// export const withRatingLabel = (RestaurantCard) => {
-// 	return(props) => {
-// 		return(
-// 			<div>
-// 				<label className="absolute p-2 m-2 bg-blue-950 text-white rounded-lg text-sm">Top Rated</label>
-// 				<RestaurantCard {...props} />
-// 			</div>
-// 		)
-// 	}
-// }
 exports.default = RestaurantCard;
 var _c;
 $RefreshReg$(_c, "RestaurantCard");
@@ -35480,90 +35522,841 @@ var _react = require("react");
 var _reactDefault = parcelHelpers.interopDefault(_react);
 function Shimmer() {
     return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
-        className: "shimmer-container",
+        className: "flex flex-wrap p-5 w-5/6 mx-auto",
         children: [
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
-                className: "shimmer-card"
-            }, void 0, false, {
+                className: "p-4 rounded-lg  shadow-md m-4",
+                children: [
+                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                        className: "bg-gray-300 h-40 w-full rounded-lg mb-4 animate-pulse"
+                    }, void 0, false, {
+                        fileName: "src/components/Shimmer.js",
+                        lineNumber: 7,
+                        columnNumber: 5
+                    }, this),
+                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                        className: "flex items-center justify-between mb-2",
+                        children: [
+                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                                className: "bg-gray-300 h-4 w-24 rounded-full"
+                            }, void 0, false, {
+                                fileName: "src/components/Shimmer.js",
+                                lineNumber: 9,
+                                columnNumber: 6
+                            }, this),
+                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                                className: "bg-gray-300 h-4 w-12 rounded-full"
+                            }, void 0, false, {
+                                fileName: "src/components/Shimmer.js",
+                                lineNumber: 10,
+                                columnNumber: 6
+                            }, this)
+                        ]
+                    }, void 0, true, {
+                        fileName: "src/components/Shimmer.js",
+                        lineNumber: 8,
+                        columnNumber: 5
+                    }, this),
+                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                        className: "bg-gray-300 h-4 w-36 rounded-full"
+                    }, void 0, false, {
+                        fileName: "src/components/Shimmer.js",
+                        lineNumber: 12,
+                        columnNumber: 5
+                    }, this)
+                ]
+            }, void 0, true, {
                 fileName: "src/components/Shimmer.js",
                 lineNumber: 6,
-                columnNumber: 3
+                columnNumber: 4
             }, this),
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
-                className: "shimmer-card"
-            }, void 0, false, {
-                fileName: "src/components/Shimmer.js",
-                lineNumber: 7,
-                columnNumber: 3
-            }, this),
-            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
-                className: "shimmer-card"
-            }, void 0, false, {
-                fileName: "src/components/Shimmer.js",
-                lineNumber: 8,
-                columnNumber: 3
-            }, this),
-            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
-                className: "shimmer-card"
-            }, void 0, false, {
-                fileName: "src/components/Shimmer.js",
-                lineNumber: 9,
-                columnNumber: 3
-            }, this),
-            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
-                className: "shimmer-card"
-            }, void 0, false, {
-                fileName: "src/components/Shimmer.js",
-                lineNumber: 10,
-                columnNumber: 3
-            }, this),
-            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
-                className: "shimmer-card"
-            }, void 0, false, {
-                fileName: "src/components/Shimmer.js",
-                lineNumber: 11,
-                columnNumber: 3
-            }, this),
-            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
-                className: "shimmer-card"
-            }, void 0, false, {
-                fileName: "src/components/Shimmer.js",
-                lineNumber: 12,
-                columnNumber: 3
-            }, this),
-            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
-                className: "shimmer-card"
-            }, void 0, false, {
-                fileName: "src/components/Shimmer.js",
-                lineNumber: 13,
-                columnNumber: 3
-            }, this),
-            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
-                className: "shimmer-card"
-            }, void 0, false, {
+                className: "p-4 rounded-lg  shadow-md m-4",
+                children: [
+                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                        className: "bg-gray-300 h-40 w-full rounded-lg mb-4 animate-pulse"
+                    }, void 0, false, {
+                        fileName: "src/components/Shimmer.js",
+                        lineNumber: 15,
+                        columnNumber: 5
+                    }, this),
+                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                        className: "flex items-center justify-between mb-2",
+                        children: [
+                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                                className: "bg-gray-300 h-4 w-24 rounded-full"
+                            }, void 0, false, {
+                                fileName: "src/components/Shimmer.js",
+                                lineNumber: 17,
+                                columnNumber: 6
+                            }, this),
+                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                                className: "bg-gray-300 h-4 w-12 rounded-full"
+                            }, void 0, false, {
+                                fileName: "src/components/Shimmer.js",
+                                lineNumber: 18,
+                                columnNumber: 6
+                            }, this)
+                        ]
+                    }, void 0, true, {
+                        fileName: "src/components/Shimmer.js",
+                        lineNumber: 16,
+                        columnNumber: 5
+                    }, this),
+                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                        className: "bg-gray-300 h-4 w-36 rounded-full"
+                    }, void 0, false, {
+                        fileName: "src/components/Shimmer.js",
+                        lineNumber: 20,
+                        columnNumber: 5
+                    }, this)
+                ]
+            }, void 0, true, {
                 fileName: "src/components/Shimmer.js",
                 lineNumber: 14,
-                columnNumber: 3
+                columnNumber: 4
             }, this),
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
-                className: "shimmer-card"
-            }, void 0, false, {
+                className: "p-4 rounded-lg  shadow-md m-4",
+                children: [
+                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                        className: "bg-gray-300 h-40 w-full rounded-lg mb-4 animate-pulse"
+                    }, void 0, false, {
+                        fileName: "src/components/Shimmer.js",
+                        lineNumber: 23,
+                        columnNumber: 5
+                    }, this),
+                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                        className: "flex items-center justify-between mb-2",
+                        children: [
+                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                                className: "bg-gray-300 h-4 w-24 rounded-full"
+                            }, void 0, false, {
+                                fileName: "src/components/Shimmer.js",
+                                lineNumber: 25,
+                                columnNumber: 6
+                            }, this),
+                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                                className: "bg-gray-300 h-4 w-12 rounded-full"
+                            }, void 0, false, {
+                                fileName: "src/components/Shimmer.js",
+                                lineNumber: 26,
+                                columnNumber: 6
+                            }, this)
+                        ]
+                    }, void 0, true, {
+                        fileName: "src/components/Shimmer.js",
+                        lineNumber: 24,
+                        columnNumber: 5
+                    }, this),
+                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                        className: "bg-gray-300 h-4 w-36 rounded-full"
+                    }, void 0, false, {
+                        fileName: "src/components/Shimmer.js",
+                        lineNumber: 28,
+                        columnNumber: 5
+                    }, this)
+                ]
+            }, void 0, true, {
                 fileName: "src/components/Shimmer.js",
-                lineNumber: 15,
-                columnNumber: 3
+                lineNumber: 22,
+                columnNumber: 4
             }, this),
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
-                className: "shimmer-card"
-            }, void 0, false, {
+                className: "p-4 rounded-lg shadow-md m-4",
+                children: [
+                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                        className: "bg-gray-300 h-40 w-full rounded-lg mb-4 animate-pulse"
+                    }, void 0, false, {
+                        fileName: "src/components/Shimmer.js",
+                        lineNumber: 31,
+                        columnNumber: 5
+                    }, this),
+                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                        className: "flex items-center justify-between mb-2",
+                        children: [
+                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                                className: "bg-gray-300 h-4 w-24 rounded-full"
+                            }, void 0, false, {
+                                fileName: "src/components/Shimmer.js",
+                                lineNumber: 33,
+                                columnNumber: 6
+                            }, this),
+                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                                className: "bg-gray-300 h-4 w-12 rounded-full"
+                            }, void 0, false, {
+                                fileName: "src/components/Shimmer.js",
+                                lineNumber: 34,
+                                columnNumber: 6
+                            }, this)
+                        ]
+                    }, void 0, true, {
+                        fileName: "src/components/Shimmer.js",
+                        lineNumber: 32,
+                        columnNumber: 5
+                    }, this),
+                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                        className: "bg-gray-300 h-4 w-36 rounded-full"
+                    }, void 0, false, {
+                        fileName: "src/components/Shimmer.js",
+                        lineNumber: 36,
+                        columnNumber: 5
+                    }, this)
+                ]
+            }, void 0, true, {
                 fileName: "src/components/Shimmer.js",
-                lineNumber: 16,
-                columnNumber: 3
+                lineNumber: 30,
+                columnNumber: 4
+            }, this),
+            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                className: "p-4 rounded-lg shadow-md m-4",
+                children: [
+                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                        className: "bg-gray-300 h-40 w-full rounded-lg mb-4 animate-pulse"
+                    }, void 0, false, {
+                        fileName: "src/components/Shimmer.js",
+                        lineNumber: 39,
+                        columnNumber: 5
+                    }, this),
+                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                        className: "flex items-center justify-between mb-2",
+                        children: [
+                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                                className: "bg-gray-300 h-4 w-24 rounded-full"
+                            }, void 0, false, {
+                                fileName: "src/components/Shimmer.js",
+                                lineNumber: 41,
+                                columnNumber: 6
+                            }, this),
+                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                                className: "bg-gray-300 h-4 w-12 rounded-full"
+                            }, void 0, false, {
+                                fileName: "src/components/Shimmer.js",
+                                lineNumber: 42,
+                                columnNumber: 6
+                            }, this)
+                        ]
+                    }, void 0, true, {
+                        fileName: "src/components/Shimmer.js",
+                        lineNumber: 40,
+                        columnNumber: 5
+                    }, this),
+                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                        className: "bg-gray-300 h-4 w-36 rounded-full"
+                    }, void 0, false, {
+                        fileName: "src/components/Shimmer.js",
+                        lineNumber: 44,
+                        columnNumber: 5
+                    }, this)
+                ]
+            }, void 0, true, {
+                fileName: "src/components/Shimmer.js",
+                lineNumber: 38,
+                columnNumber: 4
+            }, this),
+            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                className: "p-4 rounded-lg shadow-md m-4",
+                children: [
+                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                        className: "bg-gray-300 h-40 w-full rounded-lg mb-4 animate-pulse"
+                    }, void 0, false, {
+                        fileName: "src/components/Shimmer.js",
+                        lineNumber: 47,
+                        columnNumber: 5
+                    }, this),
+                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                        className: "flex items-center justify-between mb-2",
+                        children: [
+                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                                className: "bg-gray-300 h-4 w-24 rounded-full"
+                            }, void 0, false, {
+                                fileName: "src/components/Shimmer.js",
+                                lineNumber: 49,
+                                columnNumber: 6
+                            }, this),
+                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                                className: "bg-gray-300 h-4 w-12 rounded-full"
+                            }, void 0, false, {
+                                fileName: "src/components/Shimmer.js",
+                                lineNumber: 50,
+                                columnNumber: 6
+                            }, this)
+                        ]
+                    }, void 0, true, {
+                        fileName: "src/components/Shimmer.js",
+                        lineNumber: 48,
+                        columnNumber: 5
+                    }, this),
+                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                        className: "bg-gray-300 h-4 w-36 rounded-full"
+                    }, void 0, false, {
+                        fileName: "src/components/Shimmer.js",
+                        lineNumber: 52,
+                        columnNumber: 5
+                    }, this)
+                ]
+            }, void 0, true, {
+                fileName: "src/components/Shimmer.js",
+                lineNumber: 46,
+                columnNumber: 4
+            }, this),
+            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                className: "p-4 rounded-lg shadow-md m-4",
+                children: [
+                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                        className: "bg-gray-300 h-40 w-full rounded-lg mb-4 animate-pulse"
+                    }, void 0, false, {
+                        fileName: "src/components/Shimmer.js",
+                        lineNumber: 55,
+                        columnNumber: 5
+                    }, this),
+                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                        className: "flex items-center justify-between mb-2",
+                        children: [
+                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                                className: "bg-gray-300 h-4 w-24 rounded-full"
+                            }, void 0, false, {
+                                fileName: "src/components/Shimmer.js",
+                                lineNumber: 57,
+                                columnNumber: 6
+                            }, this),
+                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                                className: "bg-gray-300 h-4 w-12 rounded-full"
+                            }, void 0, false, {
+                                fileName: "src/components/Shimmer.js",
+                                lineNumber: 58,
+                                columnNumber: 6
+                            }, this)
+                        ]
+                    }, void 0, true, {
+                        fileName: "src/components/Shimmer.js",
+                        lineNumber: 56,
+                        columnNumber: 5
+                    }, this),
+                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                        className: "bg-gray-300 h-4 w-36 rounded-full"
+                    }, void 0, false, {
+                        fileName: "src/components/Shimmer.js",
+                        lineNumber: 60,
+                        columnNumber: 5
+                    }, this)
+                ]
+            }, void 0, true, {
+                fileName: "src/components/Shimmer.js",
+                lineNumber: 54,
+                columnNumber: 4
+            }, this),
+            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                className: "p-4 rounded-lg shadow-md m-4",
+                children: [
+                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                        className: "bg-gray-300 h-40 w-full rounded-lg mb-4 animate-pulse"
+                    }, void 0, false, {
+                        fileName: "src/components/Shimmer.js",
+                        lineNumber: 63,
+                        columnNumber: 5
+                    }, this),
+                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                        className: "flex items-center justify-between mb-2",
+                        children: [
+                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                                className: "bg-gray-300 h-4 w-24 rounded-full"
+                            }, void 0, false, {
+                                fileName: "src/components/Shimmer.js",
+                                lineNumber: 65,
+                                columnNumber: 6
+                            }, this),
+                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                                className: "bg-gray-300 h-4 w-12 rounded-full"
+                            }, void 0, false, {
+                                fileName: "src/components/Shimmer.js",
+                                lineNumber: 66,
+                                columnNumber: 6
+                            }, this)
+                        ]
+                    }, void 0, true, {
+                        fileName: "src/components/Shimmer.js",
+                        lineNumber: 64,
+                        columnNumber: 5
+                    }, this),
+                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                        className: "bg-gray-300 h-4 w-36 rounded-full"
+                    }, void 0, false, {
+                        fileName: "src/components/Shimmer.js",
+                        lineNumber: 68,
+                        columnNumber: 5
+                    }, this)
+                ]
+            }, void 0, true, {
+                fileName: "src/components/Shimmer.js",
+                lineNumber: 62,
+                columnNumber: 4
+            }, this),
+            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                className: "p-4 rounded-lg shadow-md m-4",
+                children: [
+                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                        className: "bg-gray-300 h-40 w-full rounded-lg mb-4 animate-pulse"
+                    }, void 0, false, {
+                        fileName: "src/components/Shimmer.js",
+                        lineNumber: 71,
+                        columnNumber: 5
+                    }, this),
+                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                        className: "flex items-center justify-between mb-2",
+                        children: [
+                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                                className: "bg-gray-300 h-4 w-24 rounded-full"
+                            }, void 0, false, {
+                                fileName: "src/components/Shimmer.js",
+                                lineNumber: 73,
+                                columnNumber: 6
+                            }, this),
+                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                                className: "bg-gray-300 h-4 w-12 rounded-full"
+                            }, void 0, false, {
+                                fileName: "src/components/Shimmer.js",
+                                lineNumber: 74,
+                                columnNumber: 6
+                            }, this)
+                        ]
+                    }, void 0, true, {
+                        fileName: "src/components/Shimmer.js",
+                        lineNumber: 72,
+                        columnNumber: 5
+                    }, this),
+                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                        className: "bg-gray-300 h-4 w-36 rounded-full"
+                    }, void 0, false, {
+                        fileName: "src/components/Shimmer.js",
+                        lineNumber: 76,
+                        columnNumber: 5
+                    }, this)
+                ]
+            }, void 0, true, {
+                fileName: "src/components/Shimmer.js",
+                lineNumber: 70,
+                columnNumber: 4
+            }, this),
+            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                className: "p-4 rounded-lg shadow-md m-4",
+                children: [
+                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                        className: "bg-gray-300 h-40 w-full rounded-lg mb-4 animate-pulse"
+                    }, void 0, false, {
+                        fileName: "src/components/Shimmer.js",
+                        lineNumber: 79,
+                        columnNumber: 5
+                    }, this),
+                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                        className: "flex items-center justify-between mb-2",
+                        children: [
+                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                                className: "bg-gray-300 h-4 w-24 rounded-full"
+                            }, void 0, false, {
+                                fileName: "src/components/Shimmer.js",
+                                lineNumber: 81,
+                                columnNumber: 6
+                            }, this),
+                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                                className: "bg-gray-300 h-4 w-12 rounded-full"
+                            }, void 0, false, {
+                                fileName: "src/components/Shimmer.js",
+                                lineNumber: 82,
+                                columnNumber: 6
+                            }, this)
+                        ]
+                    }, void 0, true, {
+                        fileName: "src/components/Shimmer.js",
+                        lineNumber: 80,
+                        columnNumber: 5
+                    }, this),
+                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                        className: "bg-gray-300 h-4 w-36 rounded-full"
+                    }, void 0, false, {
+                        fileName: "src/components/Shimmer.js",
+                        lineNumber: 84,
+                        columnNumber: 5
+                    }, this)
+                ]
+            }, void 0, true, {
+                fileName: "src/components/Shimmer.js",
+                lineNumber: 78,
+                columnNumber: 4
+            }, this),
+            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                className: "p-4 rounded-lg shadow-md m-4",
+                children: [
+                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                        className: "bg-gray-300 h-40 w-full rounded-lg mb-4 animate-pulse"
+                    }, void 0, false, {
+                        fileName: "src/components/Shimmer.js",
+                        lineNumber: 87,
+                        columnNumber: 5
+                    }, this),
+                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                        className: "flex items-center justify-between mb-2",
+                        children: [
+                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                                className: "bg-gray-300 h-4 w-24 rounded-full"
+                            }, void 0, false, {
+                                fileName: "src/components/Shimmer.js",
+                                lineNumber: 89,
+                                columnNumber: 6
+                            }, this),
+                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                                className: "bg-gray-300 h-4 w-12 rounded-full"
+                            }, void 0, false, {
+                                fileName: "src/components/Shimmer.js",
+                                lineNumber: 90,
+                                columnNumber: 6
+                            }, this)
+                        ]
+                    }, void 0, true, {
+                        fileName: "src/components/Shimmer.js",
+                        lineNumber: 88,
+                        columnNumber: 5
+                    }, this),
+                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                        className: "bg-gray-300 h-4 w-36 rounded-full"
+                    }, void 0, false, {
+                        fileName: "src/components/Shimmer.js",
+                        lineNumber: 92,
+                        columnNumber: 5
+                    }, this)
+                ]
+            }, void 0, true, {
+                fileName: "src/components/Shimmer.js",
+                lineNumber: 86,
+                columnNumber: 4
+            }, this),
+            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                className: "p-4 rounded-lg shadow-md m-4",
+                children: [
+                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                        className: "bg-gray-300 h-40 w-full rounded-lg mb-4 animate-pulse"
+                    }, void 0, false, {
+                        fileName: "src/components/Shimmer.js",
+                        lineNumber: 95,
+                        columnNumber: 5
+                    }, this),
+                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                        className: "flex items-center justify-between mb-2",
+                        children: [
+                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                                className: "bg-gray-300 h-4 w-24 rounded-full"
+                            }, void 0, false, {
+                                fileName: "src/components/Shimmer.js",
+                                lineNumber: 97,
+                                columnNumber: 6
+                            }, this),
+                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                                className: "bg-gray-300 h-4 w-12 rounded-full"
+                            }, void 0, false, {
+                                fileName: "src/components/Shimmer.js",
+                                lineNumber: 98,
+                                columnNumber: 6
+                            }, this)
+                        ]
+                    }, void 0, true, {
+                        fileName: "src/components/Shimmer.js",
+                        lineNumber: 96,
+                        columnNumber: 5
+                    }, this),
+                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                        className: "bg-gray-300 h-4 w-36 rounded-full"
+                    }, void 0, false, {
+                        fileName: "src/components/Shimmer.js",
+                        lineNumber: 100,
+                        columnNumber: 5
+                    }, this)
+                ]
+            }, void 0, true, {
+                fileName: "src/components/Shimmer.js",
+                lineNumber: 94,
+                columnNumber: 4
+            }, this),
+            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                className: "p-4 rounded-lg shadow-md m-4",
+                children: [
+                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                        className: "bg-gray-300 h-40 w-full rounded-lg mb-4 animate-pulse"
+                    }, void 0, false, {
+                        fileName: "src/components/Shimmer.js",
+                        lineNumber: 103,
+                        columnNumber: 5
+                    }, this),
+                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                        className: "flex items-center justify-between mb-2",
+                        children: [
+                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                                className: "bg-gray-300 h-4 w-24 rounded-full"
+                            }, void 0, false, {
+                                fileName: "src/components/Shimmer.js",
+                                lineNumber: 105,
+                                columnNumber: 6
+                            }, this),
+                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                                className: "bg-gray-300 h-4 w-12 rounded-full"
+                            }, void 0, false, {
+                                fileName: "src/components/Shimmer.js",
+                                lineNumber: 106,
+                                columnNumber: 6
+                            }, this)
+                        ]
+                    }, void 0, true, {
+                        fileName: "src/components/Shimmer.js",
+                        lineNumber: 104,
+                        columnNumber: 5
+                    }, this),
+                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                        className: "bg-gray-300 h-4 w-36 rounded-full"
+                    }, void 0, false, {
+                        fileName: "src/components/Shimmer.js",
+                        lineNumber: 108,
+                        columnNumber: 5
+                    }, this)
+                ]
+            }, void 0, true, {
+                fileName: "src/components/Shimmer.js",
+                lineNumber: 102,
+                columnNumber: 4
+            }, this),
+            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                className: "p-4 rounded-lg shadow-md m-4",
+                children: [
+                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                        className: "bg-gray-300 h-40 w-full rounded-lg mb-4 animate-pulse"
+                    }, void 0, false, {
+                        fileName: "src/components/Shimmer.js",
+                        lineNumber: 111,
+                        columnNumber: 5
+                    }, this),
+                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                        className: "flex items-center justify-between mb-2",
+                        children: [
+                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                                className: "bg-gray-300 h-4 w-24 rounded-full"
+                            }, void 0, false, {
+                                fileName: "src/components/Shimmer.js",
+                                lineNumber: 113,
+                                columnNumber: 6
+                            }, this),
+                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                                className: "bg-gray-300 h-4 w-12 rounded-full"
+                            }, void 0, false, {
+                                fileName: "src/components/Shimmer.js",
+                                lineNumber: 114,
+                                columnNumber: 6
+                            }, this)
+                        ]
+                    }, void 0, true, {
+                        fileName: "src/components/Shimmer.js",
+                        lineNumber: 112,
+                        columnNumber: 5
+                    }, this),
+                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                        className: "bg-gray-300 h-4 w-36 rounded-full"
+                    }, void 0, false, {
+                        fileName: "src/components/Shimmer.js",
+                        lineNumber: 116,
+                        columnNumber: 5
+                    }, this)
+                ]
+            }, void 0, true, {
+                fileName: "src/components/Shimmer.js",
+                lineNumber: 110,
+                columnNumber: 4
+            }, this),
+            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                className: "p-4 rounded-lg shadow-md m-4",
+                children: [
+                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                        className: "bg-gray-300 h-40 w-full rounded-lg mb-4 animate-pulse"
+                    }, void 0, false, {
+                        fileName: "src/components/Shimmer.js",
+                        lineNumber: 119,
+                        columnNumber: 5
+                    }, this),
+                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                        className: "flex items-center justify-between mb-2",
+                        children: [
+                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                                className: "bg-gray-300 h-4 w-24 rounded-full"
+                            }, void 0, false, {
+                                fileName: "src/components/Shimmer.js",
+                                lineNumber: 121,
+                                columnNumber: 6
+                            }, this),
+                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                                className: "bg-gray-300 h-4 w-12 rounded-full"
+                            }, void 0, false, {
+                                fileName: "src/components/Shimmer.js",
+                                lineNumber: 122,
+                                columnNumber: 6
+                            }, this)
+                        ]
+                    }, void 0, true, {
+                        fileName: "src/components/Shimmer.js",
+                        lineNumber: 120,
+                        columnNumber: 5
+                    }, this),
+                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                        className: "bg-gray-300 h-4 w-36 rounded-full"
+                    }, void 0, false, {
+                        fileName: "src/components/Shimmer.js",
+                        lineNumber: 124,
+                        columnNumber: 5
+                    }, this)
+                ]
+            }, void 0, true, {
+                fileName: "src/components/Shimmer.js",
+                lineNumber: 118,
+                columnNumber: 4
+            }, this),
+            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                className: "p-4 rounded-lg shadow-md m-4",
+                children: [
+                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                        className: "bg-gray-300 h-40 w-full rounded-lg mb-4 animate-pulse"
+                    }, void 0, false, {
+                        fileName: "src/components/Shimmer.js",
+                        lineNumber: 126,
+                        columnNumber: 5
+                    }, this),
+                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                        className: "flex items-center justify-between mb-2",
+                        children: [
+                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                                className: "bg-gray-300 h-4 w-24 rounded-full"
+                            }, void 0, false, {
+                                fileName: "src/components/Shimmer.js",
+                                lineNumber: 128,
+                                columnNumber: 6
+                            }, this),
+                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                                className: "bg-gray-300 h-4 w-12 rounded-full"
+                            }, void 0, false, {
+                                fileName: "src/components/Shimmer.js",
+                                lineNumber: 129,
+                                columnNumber: 6
+                            }, this)
+                        ]
+                    }, void 0, true, {
+                        fileName: "src/components/Shimmer.js",
+                        lineNumber: 127,
+                        columnNumber: 5
+                    }, this),
+                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                        className: "bg-gray-300 h-4 w-36 rounded-full"
+                    }, void 0, false, {
+                        fileName: "src/components/Shimmer.js",
+                        lineNumber: 131,
+                        columnNumber: 5
+                    }, this)
+                ]
+            }, void 0, true, {
+                fileName: "src/components/Shimmer.js",
+                lineNumber: 125,
+                columnNumber: 10
+            }, this),
+            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                className: "p-4 rounded-lg shadow-md m-4",
+                children: [
+                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                        className: "bg-gray-300 h-40 w-full rounded-lg mb-4 animate-pulse"
+                    }, void 0, false, {
+                        fileName: "src/components/Shimmer.js",
+                        lineNumber: 134,
+                        columnNumber: 5
+                    }, this),
+                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                        className: "flex items-center justify-between mb-2",
+                        children: [
+                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                                className: "bg-gray-300 h-4 w-24 rounded-full"
+                            }, void 0, false, {
+                                fileName: "src/components/Shimmer.js",
+                                lineNumber: 136,
+                                columnNumber: 6
+                            }, this),
+                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                                className: "bg-gray-300 h-4 w-12 rounded-full"
+                            }, void 0, false, {
+                                fileName: "src/components/Shimmer.js",
+                                lineNumber: 137,
+                                columnNumber: 6
+                            }, this)
+                        ]
+                    }, void 0, true, {
+                        fileName: "src/components/Shimmer.js",
+                        lineNumber: 135,
+                        columnNumber: 5
+                    }, this),
+                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                        className: "bg-gray-300 h-4 w-36 rounded-full"
+                    }, void 0, false, {
+                        fileName: "src/components/Shimmer.js",
+                        lineNumber: 139,
+                        columnNumber: 5
+                    }, this)
+                ]
+            }, void 0, true, {
+                fileName: "src/components/Shimmer.js",
+                lineNumber: 133,
+                columnNumber: 4
+            }, this),
+            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                className: "p-4 rounded-lg shadow-md m-4",
+                children: [
+                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                        className: "bg-gray-300 h-40 w-full rounded-lg mb-4 animate-pulse"
+                    }, void 0, false, {
+                        fileName: "src/components/Shimmer.js",
+                        lineNumber: 142,
+                        columnNumber: 5
+                    }, this),
+                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                        className: "flex items-center justify-between mb-2",
+                        children: [
+                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                                className: "bg-gray-300 h-4 w-24 rounded-full"
+                            }, void 0, false, {
+                                fileName: "src/components/Shimmer.js",
+                                lineNumber: 144,
+                                columnNumber: 6
+                            }, this),
+                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                                className: "bg-gray-300 h-4 w-12 rounded-full"
+                            }, void 0, false, {
+                                fileName: "src/components/Shimmer.js",
+                                lineNumber: 145,
+                                columnNumber: 6
+                            }, this)
+                        ]
+                    }, void 0, true, {
+                        fileName: "src/components/Shimmer.js",
+                        lineNumber: 143,
+                        columnNumber: 5
+                    }, this),
+                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                        className: "bg-gray-300 h-4 w-36 rounded-full"
+                    }, void 0, false, {
+                        fileName: "src/components/Shimmer.js",
+                        lineNumber: 147,
+                        columnNumber: 5
+                    }, this)
+                ]
+            }, void 0, true, {
+                fileName: "src/components/Shimmer.js",
+                lineNumber: 141,
+                columnNumber: 4
             }, this)
         ]
     }, void 0, true, {
         fileName: "src/components/Shimmer.js",
         lineNumber: 5,
-        columnNumber: 2
+        columnNumber: 3
     }, this);
 }
 _c = Shimmer;
@@ -35576,7 +36369,10 @@ $RefreshReg$(_c, "Shimmer");
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru"}],"9R1Eu":[function(require,module,exports) {
+},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru"}],"kGloa":[function(require,module,exports) {
+module.exports = JSON.parse('{"cards":[{"card":{"card":{"@type":"type.googleapis.com/swiggy.gandalf.widgets.v2.GridWidget","header":{"headerStyling":{"padding":{"left":16,"top":14,"bottom":2}}},"layout":{"rows":1,"columns":5,"horizontalScrollEnabled":true,"shouldSnap":true,"itemSpacing":10,"widgetPadding":{},"containerStyle":{"containerPadding":{"left":16,"top":12,"right":16,"bottom":12}},"scrollBar":{"scrollThumbColor":"#E46D47","scrollTrackColor":"#E4E4E4","width":54,"height":4,"scrollStyling":{"padding":{"top":6,"bottom":12}}},"autoScrollConfig":{"isScrollEnabled":true,"autoScrollDuration":4,"autoScrollResetDuration":4},"dotScrollBar":{"activeColor":"#36393E","inactiveColor":"#66686E","activeSize":16,"inactiveMediumSize":7,"inactiveSmallSize":4,"dotSpacing":8,"windowSize":5,"showCount":true,"textColor":"#FFFFFF","scrollStyling":{"padding":{"top":6,"bottom":12}}}},"imageGridCards":{"info":[{"id":"1200050","imageId":"rng/md/carousel/production/186a71018df06ce2bea1db55086d32e4","action":{"link":"https://www.swiggy.com/collections/92868?collection_id=92868&tags=layout_ux4&type=rcv2","text":"All new super","type":"WEBLINK"},"entityType":"BANNER","accessibility":{"altText":"GET 50% OFF ON FIRST ORDER","altTextCta":"ORDER NOW"},"entityId":"92868","frequencyCapping":{}},{"id":"1590659","imageId":"rng/md/carousel/production/5ebff1366e7089dd4a2ad7c9433b8067","action":{"link":"https://www.swiggy.com/collections/90093?collection_id=90093&tags=layout_ux4%2CDISCOUNTING_COUPON_MEGASAVER&type=rcv2","text":"flat 175","type":"WEBLINK"},"entityType":"BANNER","accessibility":{"altText":"flat 175","altTextCta":"order now"},"entityId":"90093","frequencyCapping":{}},{"id":"1063869","imageId":"rng/md/carousel/production/7004bb67da2bc79145552e05a4605d6e","action":{"link":"https://www.swiggy.com/collections/89142?collection_id=89142&tags=layout_ux4&type=rcv2","text":"Restaurants in Focus","type":"WEBLINK"},"entityType":"BANNER","accessibility":{"altText":"Restaurants in Focus","altTextCta":"Order Now"},"entityId":"89142","frequencyCapping":{}},{"id":"731006","imageId":"rng/md/carousel/production/7dec1c62b4e539323ea54bae5e152c62","action":{"link":"https://www.swiggy.com/collections/78542?collection_id=78542&tags=layout_ux4&type=rcv2","text":"Holi","type":"WEBLINK"},"entityType":"BANNER","accessibility":{"altText":"TOP BRANDS TOP OFFERS","altTextCta":"ORDER NOW"},"entityId":"78542","frequencyCapping":{}},{"id":"1170780","imageId":"rng/md/carousel/production/7f77d34fccef6a22db009b5281f22ae2","action":{"link":"https://www.swiggy.com/collections/92288?collection_id=92288&tags=layout_ux4%2CDISCOUNTING_COUPON_PARTY&type=rcv2","text":"Holi","type":"WEBLINK"},"entityType":"BANNER","accessibility":{"altText":"NO UPPER LIMIT","altTextCta":"Order Now"},"entityId":"92288","frequencyCapping":{}}],"style":{"width":{"type":"TYPE_RELATIVE","value":0.95238,"reference":"RELATIVE_DIMENSION_REFERENCE_CONTAINER_WIDTH"},"height":{"type":"TYPE_RELATIVE","value":0.59685,"reference":"RELATIVE_DIMENSION_REFERENCE_WIDTH"}}},"id":"topical_banner","gridElements":{"infoWithStyle":{"@type":"type.googleapis.com/swiggy.gandalf.widgets.v2.ImageInfoLayoutCard","info":[{"id":"1200050","imageId":"rng/md/carousel/production/186a71018df06ce2bea1db55086d32e4","action":{"link":"https://www.swiggy.com/collections/92868?collection_id=92868&tags=layout_ux4&type=rcv2","text":"All new super","type":"WEBLINK"},"entityType":"BANNER","accessibility":{"altText":"GET 50% OFF ON FIRST ORDER","altTextCta":"ORDER NOW"},"entityId":"92868","frequencyCapping":{}},{"id":"1590659","imageId":"rng/md/carousel/production/5ebff1366e7089dd4a2ad7c9433b8067","action":{"link":"https://www.swiggy.com/collections/90093?collection_id=90093&tags=layout_ux4%2CDISCOUNTING_COUPON_MEGASAVER&type=rcv2","text":"flat 175","type":"WEBLINK"},"entityType":"BANNER","accessibility":{"altText":"flat 175","altTextCta":"order now"},"entityId":"90093","frequencyCapping":{}},{"id":"1063869","imageId":"rng/md/carousel/production/7004bb67da2bc79145552e05a4605d6e","action":{"link":"https://www.swiggy.com/collections/89142?collection_id=89142&tags=layout_ux4&type=rcv2","text":"Restaurants in Focus","type":"WEBLINK"},"entityType":"BANNER","accessibility":{"altText":"Restaurants in Focus","altTextCta":"Order Now"},"entityId":"89142","frequencyCapping":{}},{"id":"731006","imageId":"rng/md/carousel/production/7dec1c62b4e539323ea54bae5e152c62","action":{"link":"https://www.swiggy.com/collections/78542?collection_id=78542&tags=layout_ux4&type=rcv2","text":"Holi","type":"WEBLINK"},"entityType":"BANNER","accessibility":{"altText":"TOP BRANDS TOP OFFERS","altTextCta":"ORDER NOW"},"entityId":"78542","frequencyCapping":{}},{"id":"1170780","imageId":"rng/md/carousel/production/7f77d34fccef6a22db009b5281f22ae2","action":{"link":"https://www.swiggy.com/collections/92288?collection_id=92288&tags=layout_ux4%2CDISCOUNTING_COUPON_PARTY&type=rcv2","text":"Holi","type":"WEBLINK"},"entityType":"BANNER","accessibility":{"altText":"NO UPPER LIMIT","altTextCta":"Order Now"},"entityId":"92288","frequencyCapping":{}}],"style":{"width":{"type":"TYPE_RELATIVE","value":0.95238,"reference":"RELATIVE_DIMENSION_REFERENCE_CONTAINER_WIDTH"},"height":{"type":"TYPE_RELATIVE","value":0.59685,"reference":"RELATIVE_DIMENSION_REFERENCE_WIDTH"}}}}}}},{"card":{"card":{"@type":"type.googleapis.com/swiggy.gandalf.widgets.v2.GridWidget","header":{"title":"What\'s on your mind?","headerStyling":{"padding":{"left":16,"top":16,"bottom":4}}},"layout":{"rows":1,"columns":10,"horizontalScrollEnabled":true,"itemSpacing":24,"widgetPadding":{},"containerStyle":{"containerPadding":{"left":8,"top":8,"right":12,"bottom":4}},"scrollBar":{},"widgetTheme":{"defaultMode":{"backgroundColour":"#FFFFFF","theme":"THEME_TYPE_LIGHT"},"darkMode":{"theme":"THEME_TYPE_DARK"}}},"imageGridCards":{"info":[{"id":"750580","imageId":"v1674029856/PC_Creative%20refresh/3D_bau/banners_new/Pizza.png","action":{"link":"https://www.swiggy.com/collections/83644?collection_id=83644&tags=layout_CCS_Pizza&type=rcv2","text":"pizzas","type":"WEBLINK"},"entityType":"BANNER","accessibility":{"altText":"restaurants curated for pizza","altTextCta":"open"},"entityId":"swiggy://collectionV2?collection_id=83644&tags=layout_CCS_Pizza","frequencyCapping":{}},{"id":"750592","imageId":"v1675667625/PC_Creative%20refresh/Biryani_2.png","action":{"link":"https://www.swiggy.com/collections/83649?collection_id=83649&searchQuery=biryani&tags=layout_CCS_Biryani&type=rcv2","text":"Biryani","type":"WEBLINK"},"entityType":"BANNER","accessibility":{"altText":"restaurants curated for biryani","altTextCta":"open"},"entityId":"swiggy://collectionV2?collection_id=83649&tags=layout_CCS_Biryani&searchQuery=biryani","frequencyCapping":{}},{"id":"750582","imageId":"v1675667625/PC_Creative%20refresh/North_Indian_4.png","action":{"link":"https://www.swiggy.com/collections/83645?collection_id=83645&tags=layout_CCS_NorthIndian&type=rcv2","text":"North Indian","type":"WEBLINK"},"entityType":"BANNER","accessibility":{"altText":"restaurants curated for north indian","altTextCta":"open"},"entityId":"swiggy://collectionV2?collection_id=83645&tags=layout_CCS_NorthIndian","frequencyCapping":{}},{"id":"762797","imageId":"v1674029845/PC_Creative%20refresh/3D_bau/banners_new/Burger.png","action":{"link":"https://www.swiggy.com/collections/83637?collection_id=83637&tags=layout_CCS_Burger&type=rcv2","text":"Burgers","type":"WEBLINK"},"entityType":"BANNER","accessibility":{"altText":"restaurants curated for burger","altTextCta":"open"},"entityId":"swiggy://collectionV2?collection_id=83637&tags=layout_CCS_Burger","frequencyCapping":{}},{"id":"750588","imageId":"v1674029848/PC_Creative%20refresh/3D_bau/banners_new/Chinese.png","action":{"link":"https://www.swiggy.com/collections/83647?collection_id=83647&tags=layout_CCS_Chinese&type=rcv2","text":"Chinese","type":"WEBLINK"},"entityType":"BANNER","accessibility":{"altText":"restaurant curated for chinese","altTextCta":"open"},"entityId":"swiggy://collectionV2?collection_id=83647&tags=layout_CCS_Chinese","frequencyCapping":{}},{"id":"749874","imageId":"v1674029845/PC_Creative%20refresh/3D_bau/banners_new/Cakes.png","action":{"link":"https://www.swiggy.com/collections/83656?collection_id=83656&tags=layout_CCS_Cake&type=rcv2","text":"Cakes","type":"WEBLINK"},"entityType":"BANNER","accessibility":{"altText":"restaurant curated for cakes","altTextCta":"open"},"entityId":"swiggy://collectionV2?collection_id=83656&tags=layout_CCS_Cake","frequencyCapping":{}},{"id":"749769","imageId":"v1674029852/PC_Creative%20refresh/3D_bau/banners_new/Momos.png","action":{"link":"https://www.swiggy.com/collections/80462?collection_id=80462&tags=layout_CCS_Momos&type=rcv2","text":"Momos","type":"WEBLINK"},"entityType":"BANNER","accessibility":{"altText":"restaurant curated for momos","altTextCta":"open"},"entityId":"swiggy://collectionV2?collection_id=80462&tags=layout_CCS_Momos","frequencyCapping":{}},{"id":"750249","imageId":"v1674029859/PC_Creative%20refresh/3D_bau/banners_new/Shawarma.png","action":{"link":"https://www.swiggy.com/collections/80403?collection_id=80403&tags=layout_Shawarma_Contextual&type=rcv2","text":"Shawarma","type":"WEBLINK"},"entityType":"BANNER","accessibility":{"altText":"restaurant curated for shawarma","altTextCta":"open"},"entityId":"swiggy://collectionV2?collection_id=80403&tags=layout_Shawarma_Contextual","frequencyCapping":{}},{"id":"750636","imageId":"v1674029853/PC_Creative%20refresh/3D_bau/banners_new/Kebabs.png","action":{"link":"https://www.swiggy.com/collections/80452?collection_id=80452&tags=layout_BAU_Contextual%2Ckebab%2Cads_pc_kebab&type=rcv2","text":"Kebabs","type":"WEBLINK"},"entityType":"BANNER","accessibility":{"altText":"restaurant curated for kebabs","altTextCta":"open"},"entityId":"80452","frequencyCapping":{}},{"id":"749879","imageId":"v1674029844/PC_Creative%20refresh/3D_bau/banners_new/Chole_Bature.png","action":{"link":"https://www.swiggy.com/collections/80383?collection_id=80383&tags=layout_CCS_CholeBhature&type=rcv2","text":"Chole Bhature","type":"WEBLINK"},"entityType":"BANNER","accessibility":{"altText":"restaurant curated for chhole bhatoore","altTextCta":"open"},"entityId":"swiggy://collectionV2?collection_id=80383&tags=layout_CCS_CholeBhature","frequencyCapping":{}},{"id":"750223","imageId":"v1674029858/PC_Creative%20refresh/3D_bau/banners_new/Rolls.png","action":{"link":"https://www.swiggy.com/collections/83670?collection_id=83670&tags=layout_CCS_Rolls&type=rcv2","text":"Rolls","type":"WEBLINK"},"entityType":"BANNER","accessibility":{"altText":"restaurants curated for roll","altTextCta":"open"},"entityId":"swiggy://collectionV2?collection_id=83670&tags=layout_CCS_Rolls","frequencyCapping":{}},{"id":"750203","imageId":"v1674029853/PC_Creative%20refresh/3D_bau/banners_new/Paratha.png","action":{"link":"https://www.swiggy.com/collections/80476?collection_id=80476&tags=layout_BAU_Contextual%2Cparatha%2Cads_pc_paratha&type=rcv2","text":"Paratha","type":"WEBLINK"},"entityType":"BANNER","accessibility":{"altText":"restaurants curated for paratha","altTextCta":"open"},"entityId":"80476","frequencyCapping":{}},{"id":"750132","imageId":"v1674029850/PC_Creative%20refresh/3D_bau/banners_new/Dosa.png","action":{"link":"https://www.swiggy.com/collections/80426?collection_id=80426&tags=layout_CCS_Dosa&type=rcv2","text":"Dosa","type":"WEBLINK"},"entityType":"BANNER","accessibility":{"altText":"restaurants curated for dosa","altTextCta":"open"},"entityId":"swiggy://collectionV2?collection_id=80426&tags=layout_CCS_Dosa","frequencyCapping":{}},{"id":"750217","imageId":"v1674029854/PC_Creative%20refresh/3D_bau/banners_new/Pav_Bhaji.png","action":{"link":"https://www.swiggy.com/collections/80364?collection_id=80364&tags=layout_PavBhaji_Contextual&type=rcv2","text":"Pav Bhaji","type":"WEBLINK"},"entityType":"BANNER","accessibility":{"altText":"restaurant curated for pav bhaji","altTextCta":"open"},"entityId":"swiggy://collectionV2?collection_id=80364&tags=layout_PavBhaji_Contextual","frequencyCapping":{}},{"id":"749774","imageId":"v1674029855/PC_Creative%20refresh/3D_bau/banners_new/Noodles.png","action":{"link":"https://www.swiggy.com/collections/80464?collection_id=80464&tags=layout_BAU_Contextual%2Cnoodles&type=rcv2","text":"Noodles","type":"WEBLINK"},"entityType":"BANNER","accessibility":{"altText":"restaurant curated for noodles","altTextCta":"open"},"entityId":"80464","frequencyCapping":{}},{"id":"750207","imageId":"v1674029854/PC_Creative%20refresh/3D_bau/banners_new/Pasta.png","action":{"link":"https://www.swiggy.com/collections/80480?collection_id=80480&tags=layout_BAU_Contextual%2Cpasta%2Cads_pc_pasta&type=rcv2","text":"Pasta","type":"WEBLINK"},"entityType":"BANNER","accessibility":{"altText":"restaurant curated for pasta","altTextCta":"open"},"entityId":"80480","frequencyCapping":{}},{"id":"750597","imageId":"v1674029851/PC_Creative%20refresh/3D_bau/banners_new/Ice_Creams.png","action":{"link":"https://www.swiggy.com/collections/83650?collection_id=83650&tags=layout_CCS_IceCreams&type=rcv2","text":"Ice Cream","type":"WEBLINK"},"entityType":"BANNER","accessibility":{"altText":"restaurants curated for icecream","altTextCta":"open"},"entityId":"swiggy://collectionV2?collection_id=83650&tags=layout_CCS_IceCreams","frequencyCapping":{}},{"id":"750226","imageId":"v1674029859/PC_Creative%20refresh/3D_bau/banners_new/Salad.png","action":{"link":"https://www.swiggy.com/collections/80395?collection_id=80395&tags=layout_CCS_Salad&type=rcv2","text":"Salad","type":"WEBLINK"},"entityType":"BANNER","accessibility":{"altText":"restaurant curated for salad","altTextCta":"open"},"entityId":"swiggy://collectionV2?collection_id=80395&tags=layout_CCS_Salad","frequencyCapping":{}},{"id":"750111","imageId":"v1675667630/PC_Creative%20refresh/Desserts_2.png","action":{"link":"https://www.swiggy.com/collections/83662?collection_id=83662&tags=layout_CCS_Desserts&type=rcv2","text":"Dessert","type":"WEBLINK"},"entityType":"BANNER","accessibility":{"altText":"restaurant curated for dessert","altTextCta":"open"},"entityId":"swiggy://collectionV2?collection_id=83662&tags=layout_CCS_Desserts","frequencyCapping":{}},{"id":"750253","imageId":"rng/md/carousel/production/cbb85a3c1684891105294d11f8359996","action":{"link":"https://www.swiggy.com/collections/80407?collection_id=80407&tags=layout_CCS_Tea&type=rcv2","text":"Tea","type":"WEBLINK"},"entityType":"BANNER","accessibility":{"altText":"restaurants curated for tea","altTextCta":"open"},"entityId":"swiggy://collectionV2?collection_id=80407&tags=layout_CCS_Tea","frequencyCapping":{}}],"style":{"width":{"type":"TYPE_RELATIVE","value":0.2941,"reference":"RELATIVE_DIMENSION_REFERENCE_CONTAINER_WIDTH"},"height":{"type":"TYPE_RELATIVE","value":1.2444,"reference":"RELATIVE_DIMENSION_REFERENCE_WIDTH"}}},"id":"whats_on_your_mind","gridElements":{"infoWithStyle":{"@type":"type.googleapis.com/swiggy.gandalf.widgets.v2.ImageInfoLayoutCard","info":[{"id":"750580","imageId":"v1674029856/PC_Creative%20refresh/3D_bau/banners_new/Pizza.png","action":{"link":"https://www.swiggy.com/collections/83644?collection_id=83644&tags=layout_CCS_Pizza&type=rcv2","text":"pizzas","type":"WEBLINK"},"entityType":"BANNER","accessibility":{"altText":"restaurants curated for pizza","altTextCta":"open"},"entityId":"swiggy://collectionV2?collection_id=83644&tags=layout_CCS_Pizza","frequencyCapping":{}},{"id":"750592","imageId":"v1675667625/PC_Creative%20refresh/Biryani_2.png","action":{"link":"https://www.swiggy.com/collections/83649?collection_id=83649&searchQuery=biryani&tags=layout_CCS_Biryani&type=rcv2","text":"Biryani","type":"WEBLINK"},"entityType":"BANNER","accessibility":{"altText":"restaurants curated for biryani","altTextCta":"open"},"entityId":"swiggy://collectionV2?collection_id=83649&tags=layout_CCS_Biryani&searchQuery=biryani","frequencyCapping":{}},{"id":"750582","imageId":"v1675667625/PC_Creative%20refresh/North_Indian_4.png","action":{"link":"https://www.swiggy.com/collections/83645?collection_id=83645&tags=layout_CCS_NorthIndian&type=rcv2","text":"North Indian","type":"WEBLINK"},"entityType":"BANNER","accessibility":{"altText":"restaurants curated for north indian","altTextCta":"open"},"entityId":"swiggy://collectionV2?collection_id=83645&tags=layout_CCS_NorthIndian","frequencyCapping":{}},{"id":"762797","imageId":"v1674029845/PC_Creative%20refresh/3D_bau/banners_new/Burger.png","action":{"link":"https://www.swiggy.com/collections/83637?collection_id=83637&tags=layout_CCS_Burger&type=rcv2","text":"Burgers","type":"WEBLINK"},"entityType":"BANNER","accessibility":{"altText":"restaurants curated for burger","altTextCta":"open"},"entityId":"swiggy://collectionV2?collection_id=83637&tags=layout_CCS_Burger","frequencyCapping":{}},{"id":"750588","imageId":"v1674029848/PC_Creative%20refresh/3D_bau/banners_new/Chinese.png","action":{"link":"https://www.swiggy.com/collections/83647?collection_id=83647&tags=layout_CCS_Chinese&type=rcv2","text":"Chinese","type":"WEBLINK"},"entityType":"BANNER","accessibility":{"altText":"restaurant curated for chinese","altTextCta":"open"},"entityId":"swiggy://collectionV2?collection_id=83647&tags=layout_CCS_Chinese","frequencyCapping":{}},{"id":"749874","imageId":"v1674029845/PC_Creative%20refresh/3D_bau/banners_new/Cakes.png","action":{"link":"https://www.swiggy.com/collections/83656?collection_id=83656&tags=layout_CCS_Cake&type=rcv2","text":"Cakes","type":"WEBLINK"},"entityType":"BANNER","accessibility":{"altText":"restaurant curated for cakes","altTextCta":"open"},"entityId":"swiggy://collectionV2?collection_id=83656&tags=layout_CCS_Cake","frequencyCapping":{}},{"id":"749769","imageId":"v1674029852/PC_Creative%20refresh/3D_bau/banners_new/Momos.png","action":{"link":"https://www.swiggy.com/collections/80462?collection_id=80462&tags=layout_CCS_Momos&type=rcv2","text":"Momos","type":"WEBLINK"},"entityType":"BANNER","accessibility":{"altText":"restaurant curated for momos","altTextCta":"open"},"entityId":"swiggy://collectionV2?collection_id=80462&tags=layout_CCS_Momos","frequencyCapping":{}},{"id":"750249","imageId":"v1674029859/PC_Creative%20refresh/3D_bau/banners_new/Shawarma.png","action":{"link":"https://www.swiggy.com/collections/80403?collection_id=80403&tags=layout_Shawarma_Contextual&type=rcv2","text":"Shawarma","type":"WEBLINK"},"entityType":"BANNER","accessibility":{"altText":"restaurant curated for shawarma","altTextCta":"open"},"entityId":"swiggy://collectionV2?collection_id=80403&tags=layout_Shawarma_Contextual","frequencyCapping":{}},{"id":"750636","imageId":"v1674029853/PC_Creative%20refresh/3D_bau/banners_new/Kebabs.png","action":{"link":"https://www.swiggy.com/collections/80452?collection_id=80452&tags=layout_BAU_Contextual%2Ckebab%2Cads_pc_kebab&type=rcv2","text":"Kebabs","type":"WEBLINK"},"entityType":"BANNER","accessibility":{"altText":"restaurant curated for kebabs","altTextCta":"open"},"entityId":"80452","frequencyCapping":{}},{"id":"749879","imageId":"v1674029844/PC_Creative%20refresh/3D_bau/banners_new/Chole_Bature.png","action":{"link":"https://www.swiggy.com/collections/80383?collection_id=80383&tags=layout_CCS_CholeBhature&type=rcv2","text":"Chole Bhature","type":"WEBLINK"},"entityType":"BANNER","accessibility":{"altText":"restaurant curated for chhole bhatoore","altTextCta":"open"},"entityId":"swiggy://collectionV2?collection_id=80383&tags=layout_CCS_CholeBhature","frequencyCapping":{}},{"id":"750223","imageId":"v1674029858/PC_Creative%20refresh/3D_bau/banners_new/Rolls.png","action":{"link":"https://www.swiggy.com/collections/83670?collection_id=83670&tags=layout_CCS_Rolls&type=rcv2","text":"Rolls","type":"WEBLINK"},"entityType":"BANNER","accessibility":{"altText":"restaurants curated for roll","altTextCta":"open"},"entityId":"swiggy://collectionV2?collection_id=83670&tags=layout_CCS_Rolls","frequencyCapping":{}},{"id":"750203","imageId":"v1674029853/PC_Creative%20refresh/3D_bau/banners_new/Paratha.png","action":{"link":"https://www.swiggy.com/collections/80476?collection_id=80476&tags=layout_BAU_Contextual%2Cparatha%2Cads_pc_paratha&type=rcv2","text":"Paratha","type":"WEBLINK"},"entityType":"BANNER","accessibility":{"altText":"restaurants curated for paratha","altTextCta":"open"},"entityId":"80476","frequencyCapping":{}},{"id":"750132","imageId":"v1674029850/PC_Creative%20refresh/3D_bau/banners_new/Dosa.png","action":{"link":"https://www.swiggy.com/collections/80426?collection_id=80426&tags=layout_CCS_Dosa&type=rcv2","text":"Dosa","type":"WEBLINK"},"entityType":"BANNER","accessibility":{"altText":"restaurants curated for dosa","altTextCta":"open"},"entityId":"swiggy://collectionV2?collection_id=80426&tags=layout_CCS_Dosa","frequencyCapping":{}},{"id":"750217","imageId":"v1674029854/PC_Creative%20refresh/3D_bau/banners_new/Pav_Bhaji.png","action":{"link":"https://www.swiggy.com/collections/80364?collection_id=80364&tags=layout_PavBhaji_Contextual&type=rcv2","text":"Pav Bhaji","type":"WEBLINK"},"entityType":"BANNER","accessibility":{"altText":"restaurant curated for pav bhaji","altTextCta":"open"},"entityId":"swiggy://collectionV2?collection_id=80364&tags=layout_PavBhaji_Contextual","frequencyCapping":{}},{"id":"749774","imageId":"v1674029855/PC_Creative%20refresh/3D_bau/banners_new/Noodles.png","action":{"link":"https://www.swiggy.com/collections/80464?collection_id=80464&tags=layout_BAU_Contextual%2Cnoodles&type=rcv2","text":"Noodles","type":"WEBLINK"},"entityType":"BANNER","accessibility":{"altText":"restaurant curated for noodles","altTextCta":"open"},"entityId":"80464","frequencyCapping":{}},{"id":"750207","imageId":"v1674029854/PC_Creative%20refresh/3D_bau/banners_new/Pasta.png","action":{"link":"https://www.swiggy.com/collections/80480?collection_id=80480&tags=layout_BAU_Contextual%2Cpasta%2Cads_pc_pasta&type=rcv2","text":"Pasta","type":"WEBLINK"},"entityType":"BANNER","accessibility":{"altText":"restaurant curated for pasta","altTextCta":"open"},"entityId":"80480","frequencyCapping":{}},{"id":"750597","imageId":"v1674029851/PC_Creative%20refresh/3D_bau/banners_new/Ice_Creams.png","action":{"link":"https://www.swiggy.com/collections/83650?collection_id=83650&tags=layout_CCS_IceCreams&type=rcv2","text":"Ice Cream","type":"WEBLINK"},"entityType":"BANNER","accessibility":{"altText":"restaurants curated for icecream","altTextCta":"open"},"entityId":"swiggy://collectionV2?collection_id=83650&tags=layout_CCS_IceCreams","frequencyCapping":{}},{"id":"750226","imageId":"v1674029859/PC_Creative%20refresh/3D_bau/banners_new/Salad.png","action":{"link":"https://www.swiggy.com/collections/80395?collection_id=80395&tags=layout_CCS_Salad&type=rcv2","text":"Salad","type":"WEBLINK"},"entityType":"BANNER","accessibility":{"altText":"restaurant curated for salad","altTextCta":"open"},"entityId":"swiggy://collectionV2?collection_id=80395&tags=layout_CCS_Salad","frequencyCapping":{}},{"id":"750111","imageId":"v1675667630/PC_Creative%20refresh/Desserts_2.png","action":{"link":"https://www.swiggy.com/collections/83662?collection_id=83662&tags=layout_CCS_Desserts&type=rcv2","text":"Dessert","type":"WEBLINK"},"entityType":"BANNER","accessibility":{"altText":"restaurant curated for dessert","altTextCta":"open"},"entityId":"swiggy://collectionV2?collection_id=83662&tags=layout_CCS_Desserts","frequencyCapping":{}},{"id":"750253","imageId":"rng/md/carousel/production/cbb85a3c1684891105294d11f8359996","action":{"link":"https://www.swiggy.com/collections/80407?collection_id=80407&tags=layout_CCS_Tea&type=rcv2","text":"Tea","type":"WEBLINK"},"entityType":"BANNER","accessibility":{"altText":"restaurants curated for tea","altTextCta":"open"},"entityId":"swiggy://collectionV2?collection_id=80407&tags=layout_CCS_Tea","frequencyCapping":{}}],"style":{"width":{"type":"TYPE_RELATIVE","value":0.2941,"reference":"RELATIVE_DIMENSION_REFERENCE_CONTAINER_WIDTH"},"height":{"type":"TYPE_RELATIVE","value":1.2444,"reference":"RELATIVE_DIMENSION_REFERENCE_WIDTH"}}}}}}},{"card":{"card":{"@type":"type.googleapis.com/swiggy.gandalf.widgets.v2.GridWidget","header":{"title":"Top restaurant chains in Bhopal","action":{},"headerStyling":{"padding":{"left":16,"top":28,"bottom":18}}},"layout":{"rows":1,"columns":20,"horizontalScrollEnabled":true,"itemSpacing":32,"widgetPadding":{},"containerStyle":{"containerPadding":{"left":16,"right":12,"bottom":12}},"scrollBar":{"scrollThumbColor":"#E46D47","scrollTrackColor":"#02060C","width":54,"height":4,"scrollStyling":{"padding":{"top":6,"bottom":24}}},"widgetTheme":{"defaultMode":{"backgroundColour":"#1B3028","theme":"THEME_TYPE_DARK"},"darkMode":{"backgroundColour":"#1B3028","theme":"THEME_TYPE_DARK"}}},"id":"top_brands_for_you","gridElements":{"infoWithStyle":{"@type":"type.googleapis.com/swiggy.presentation.food.v2.FavouriteRestaurantInfoWithStyle","restaurants":[{"info":{"id":"101997","name":"Rajhans Restaurant & Thali (Ghora Nikkas)","cloudinaryImageId":"aipwx1svepzdvsreuszq","locality":"Mandir Kamali Road","areaName":"Ghora Nakkas","costForTwo":"\u20B9250 for two","cuisines":["Burgers","Chinese","Rolls & Wraps","Pizzas","Thalis","North Indian"],"avgRating":4.1,"veg":true,"parentId":"165649","avgRatingString":"4.1","totalRatingsString":"5K+","sla":{"deliveryTime":24,"lastMileTravel":1.8,"serviceability":"SERVICEABLE","slaString":"24 mins","lastMileTravelString":"1.8 km","iconType":"ICON_TYPE_EMPTY"},"availability":{"nextCloseTime":"2024-01-05 23:00:00","opened":true},"badges":{"imageBadges":[{"imageId":"v1690360529/Ratnesh_Badges/Only_on_swiggy_badge_4x.png","description":"OnlyOnSwiggy"},{"imageId":"v1695133679/badges/Pure_Veg111.png","description":"pureveg"}]},"isOpen":true,"type":"F","badgesV2":{"entityBadges":{"imageBased":{"badgeObject":[{"attributes":{"description":"OnlyOnSwiggy","imageId":"v1690360529/Ratnesh_Badges/Only_on_swiggy_badge_4x.png"}},{"attributes":{"description":"pureveg","imageId":"v1695133679/badges/Pure_Veg111.png"}}]},"textBased":{},"textExtendedBadges":{}}},"aggregatedDiscountInfoV3":{"header":"\u20B9120 OFF","subHeader":"ABOVE \u20B9199","discountTag":"FLAT DEAL"},"differentiatedUi":{"displayType":"ADS_UI_DISPLAY_TYPE_ENUM_DEFAULT","differentiatedUiMediaDetails":{"mediaType":"ADS_MEDIA_ENUM_IMAGE","lottie":{},"video":{}}},"reviewsSummary":{},"displayType":"RESTAURANT_DISPLAY_TYPE_DEFAULT","restaurantOfferPresentationInfo":{}},"analytics":{},"cta":{"link":"https://www.swiggy.com/restaurants/rajhans-restaurant-and-thali-ghora-nikkas-mandir-kamali-road-ghora-nakkas-bhopal-101997","type":"WEBLINK"}},{"info":{"id":"101059","name":"Manohar Dairy and Restaurant","cloudinaryImageId":"yhnrql8wxgu8sgqjczos","locality":"Hamidia Road","areaName":"Hamidia Road","costForTwo":"\u20B9300 for two","cuisines":["Sweets","Beverages","Desserts","Snacks","Chaat","Street Food","Chinese","Bakery","North Indian","South Indian"],"avgRating":4.6,"veg":true,"parentId":"7052","avgRatingString":"4.6","totalRatingsString":"10K+","sla":{"deliveryTime":19,"lastMileTravel":0.8,"serviceability":"SERVICEABLE","slaString":"19 mins","lastMileTravelString":"0.8 km","iconType":"ICON_TYPE_EMPTY"},"availability":{"nextCloseTime":"2024-01-05 22:30:00","opened":true},"badges":{"imageBadges":[{"imageId":"v1695133679/badges/Pure_Veg111.png","description":"pureveg"}]},"isOpen":true,"type":"F","badgesV2":{"entityBadges":{"imageBased":{"badgeObject":[{"attributes":{"description":"pureveg","imageId":"v1695133679/badges/Pure_Veg111.png"}}]},"textBased":{},"textExtendedBadges":{}}},"aggregatedDiscountInfoV3":{"header":"\u20B9120 OFF","subHeader":"ABOVE \u20B9199","discountTag":"FLAT DEAL"},"differentiatedUi":{"displayType":"ADS_UI_DISPLAY_TYPE_ENUM_DEFAULT","differentiatedUiMediaDetails":{"mediaType":"ADS_MEDIA_ENUM_IMAGE","lottie":{},"video":{}}},"reviewsSummary":{},"displayType":"RESTAURANT_DISPLAY_TYPE_DEFAULT","restaurantOfferPresentationInfo":{}},"analytics":{},"cta":{"link":"https://www.swiggy.com/restaurants/manohar-dairy-and-restaurant-hamidia-road-bhopal-101059","type":"WEBLINK"}},{"info":{"id":"106673","name":"Bhopal Udipi Restaurant","cloudinaryImageId":"zjvbljmeakcsffkky6hp","locality":"Dwarka Nagar","areaName":"Dwarka Nagar","costForTwo":"\u20B9250 for two","cuisines":["South Indian","North Indian","Chinese","Fast Food","Street Food"],"avgRating":4.1,"veg":true,"parentId":"45152","avgRatingString":"4.1","totalRatingsString":"10K+","sla":{"deliveryTime":29,"lastMileTravel":2.8,"serviceability":"SERVICEABLE","slaString":"29 mins","lastMileTravelString":"2.8 km","iconType":"ICON_TYPE_EMPTY"},"availability":{"nextCloseTime":"2024-01-05 23:59:00","opened":true},"badges":{},"isOpen":true,"type":"F","badgesV2":{"entityBadges":{"imageBased":{},"textBased":{},"textExtendedBadges":{}}},"aggregatedDiscountInfoV3":{"header":"\u20B9120 OFF","subHeader":"ABOVE \u20B9199","discountTag":"FLAT DEAL"},"differentiatedUi":{"displayType":"ADS_UI_DISPLAY_TYPE_ENUM_DEFAULT","differentiatedUiMediaDetails":{"mediaType":"ADS_MEDIA_ENUM_IMAGE","lottie":{},"video":{}}},"reviewsSummary":{},"displayType":"RESTAURANT_DISPLAY_TYPE_DEFAULT","restaurantOfferPresentationInfo":{}},"analytics":{},"cta":{"link":"https://www.swiggy.com/restaurants/bhopal-udipi-restaurant-dwarka-nagar-bhopal-106673","type":"WEBLINK"}},{"info":{"id":"419988","name":"99 Rotiwala-Bhopal","cloudinaryImageId":"brteodziq28wckphkg4f","areaName":"Subhash Nagar","costForTwo":"\u20B9250 for two","cuisines":["North Indian","Indian","Thalis","Biryani","Tandoor"],"avgRating":3.8,"veg":true,"parentId":"233857","avgRatingString":"3.8","totalRatingsString":"1K+","sla":{"deliveryTime":34,"lastMileTravel":3,"serviceability":"SERVICEABLE","slaString":"34 mins","lastMileTravelString":"3.0 km","iconType":"ICON_TYPE_EMPTY"},"availability":{"nextCloseTime":"2024-01-06 04:00:00","opened":true},"badges":{"imageBadges":[{"imageId":"v1695133679/badges/Pure_Veg111.png","description":"pureveg"}]},"isOpen":true,"type":"F","badgesV2":{"entityBadges":{"imageBased":{"badgeObject":[{"attributes":{"description":"pureveg","imageId":"v1695133679/badges/Pure_Veg111.png"}}]},"textBased":{},"textExtendedBadges":{}}},"aggregatedDiscountInfoV3":{"header":"\u20B9120 OFF","subHeader":"ABOVE \u20B9199","discountTag":"FLAT DEAL"},"differentiatedUi":{"displayType":"ADS_UI_DISPLAY_TYPE_ENUM_DEFAULT","differentiatedUiMediaDetails":{"mediaType":"ADS_MEDIA_ENUM_IMAGE","lottie":{},"video":{}}},"reviewsSummary":{},"displayType":"RESTAURANT_DISPLAY_TYPE_DEFAULT","restaurantOfferPresentationInfo":{}},"analytics":{},"cta":{"link":"https://www.swiggy.com/restaurants/99-rotiwala-bhopal-subhash-nagar-bhopal-419988","type":"WEBLINK"}},{"info":{"id":"76688","name":"Guptaji Shakahari Bhojnalay","cloudinaryImageId":"jb9iyqwlhuyxyvb6zwnz","areaName":"MP Nagar","costForTwo":"\u20B9250 for two","cuisines":["Thalis","North Indian","Indian","Fast Food","Chinese"],"avgRating":4,"veg":true,"parentId":"91882","avgRatingString":"4.0","totalRatingsString":"10K+","sla":{"deliveryTime":32,"lastMileTravel":4.9,"serviceability":"SERVICEABLE","slaString":"32 mins","lastMileTravelString":"4.9 km","iconType":"ICON_TYPE_EMPTY"},"availability":{"nextCloseTime":"2024-01-05 23:30:00","opened":true},"badges":{},"isOpen":true,"type":"F","badgesV2":{"entityBadges":{"imageBased":{},"textBased":{},"textExtendedBadges":{}}},"aggregatedDiscountInfoV3":{"header":"\u20B9120 OFF","subHeader":"ABOVE \u20B9199","discountTag":"FLAT DEAL"},"differentiatedUi":{"displayType":"ADS_UI_DISPLAY_TYPE_ENUM_DEFAULT","differentiatedUiMediaDetails":{"mediaType":"ADS_MEDIA_ENUM_IMAGE","lottie":{},"video":{}}},"reviewsSummary":{},"displayType":"RESTAURANT_DISPLAY_TYPE_DEFAULT","restaurantOfferPresentationInfo":{}},"analytics":{},"cta":{"link":"https://www.swiggy.com/restaurants/guptaji-shakahari-bhojnalay-mp-nagar-bhopal-76688","type":"WEBLINK"}},{"info":{"id":"78535","name":"Mahadev Bhojnalay","cloudinaryImageId":"u3mgfammbsuwfpkaeeif","locality":"Maharana Pratap Nagar","areaName":"MP Nagar","costForTwo":"\u20B9250 for two","cuisines":["Thalis","North Indian","Indian","Fast Food","Chinese"],"avgRating":3.9,"veg":true,"parentId":"129506","avgRatingString":"3.9","totalRatingsString":"10K+","sla":{"deliveryTime":31,"lastMileTravel":4.9,"serviceability":"SERVICEABLE","slaString":"31 mins","lastMileTravelString":"4.9 km","iconType":"ICON_TYPE_EMPTY"},"availability":{"nextCloseTime":"2024-01-05 23:55:00","opened":true},"badges":{},"isOpen":true,"type":"F","badgesV2":{"entityBadges":{"imageBased":{},"textBased":{},"textExtendedBadges":{}}},"aggregatedDiscountInfoV3":{"header":"\u20B9120 OFF","subHeader":"ABOVE \u20B9199","discountTag":"FLAT DEAL"},"differentiatedUi":{"displayType":"ADS_UI_DISPLAY_TYPE_ENUM_DEFAULT","differentiatedUiMediaDetails":{"mediaType":"ADS_MEDIA_ENUM_IMAGE","lottie":{},"video":{}}},"reviewsSummary":{},"displayType":"RESTAURANT_DISPLAY_TYPE_DEFAULT","restaurantOfferPresentationInfo":{}},"analytics":{},"cta":{"link":"https://www.swiggy.com/restaurants/mahadev-bhojnalay-maharana-pratap-nagar-mp-nagar-bhopal-78535","type":"WEBLINK"}},{"info":{"id":"613953","name":"Sharma & Vishnu Fast Food","cloudinaryImageId":"xtjilr4hbushoxflffjm","locality":"Manohar Dairy","areaName":"Hamidia Road","costForTwo":"\u20B9300 for two","cuisines":["Indian","Snacks","Mughlai","Beverages","Fast Food"],"avgRating":4.3,"veg":true,"parentId":"182026","avgRatingString":"4.3","totalRatingsString":"500+","sla":{"deliveryTime":24,"lastMileTravel":1.7,"serviceability":"SERVICEABLE","slaString":"24 mins","lastMileTravelString":"1.7 km","iconType":"ICON_TYPE_EMPTY"},"availability":{"nextCloseTime":"2024-01-05 23:25:00","opened":true},"badges":{"imageBadges":[{"imageId":"v1695133679/badges/Pure_Veg111.png","description":"pureveg"}]},"isOpen":true,"type":"F","badgesV2":{"entityBadges":{"imageBased":{"badgeObject":[{"attributes":{"description":"pureveg","imageId":"v1695133679/badges/Pure_Veg111.png"}}]},"textBased":{},"textExtendedBadges":{}}},"aggregatedDiscountInfoV3":{"header":"\u20B9120 OFF","subHeader":"ABOVE \u20B9199","discountTag":"FLAT DEAL"},"differentiatedUi":{"displayType":"ADS_UI_DISPLAY_TYPE_ENUM_DEFAULT","differentiatedUiMediaDetails":{"mediaType":"ADS_MEDIA_ENUM_IMAGE","lottie":{},"video":{}}},"reviewsSummary":{},"displayType":"RESTAURANT_DISPLAY_TYPE_DEFAULT","restaurantOfferPresentationInfo":{}},"analytics":{},"cta":{"link":"https://www.swiggy.com/restaurants/sharma-and-vishnu-fast-food-manohar-dairy-hamidia-road-bhopal-613953","type":"WEBLINK"}},{"info":{"id":"523122","name":"Domino\'s Pizza","cloudinaryImageId":"qajboygqykfvdlzo07gb","locality":"Maharaja Complex","areaName":"Peer Gate Area","costForTwo":"\u20B9400 for two","cuisines":["Pizzas","Italian","Pastas","Desserts"],"avgRating":4.1,"parentId":"2456","avgRatingString":"4.1","totalRatingsString":"100+","sla":{"deliveryTime":25,"serviceability":"SERVICEABLE","slaString":"25 mins","iconType":"ICON_TYPE_EMPTY"},"availability":{"nextCloseTime":"2024-01-05 23:55:00","opened":true},"badges":{},"isOpen":true,"type":"F","badgesV2":{"entityBadges":{"imageBased":{},"textBased":{},"textExtendedBadges":{}}},"aggregatedDiscountInfoV3":{"header":"\u20B9120 OFF","subHeader":"ABOVE \u20B9199","discountTag":"FLAT DEAL"},"differentiatedUi":{"displayType":"ADS_UI_DISPLAY_TYPE_ENUM_DEFAULT","differentiatedUiMediaDetails":{"mediaType":"ADS_MEDIA_ENUM_IMAGE","lottie":{},"video":{}}},"reviewsSummary":{},"displayType":"RESTAURANT_DISPLAY_TYPE_DEFAULT","restaurantOfferPresentationInfo":{}},"analytics":{},"cta":{"link":"https://www.swiggy.com/restaurants/dominos-pizza-maharaja-complex-peer-gate-area-bhopal-523122","type":"WEBLINK"}},{"info":{"id":"109939","name":"Zam Zam Fast Food","cloudinaryImageId":"kuisp5xx9tcutesp33yf","locality":"Alpana Cineplex","areaName":"Hamidia Road","costForTwo":"\u20B9250 for two","cuisines":["North Indian","Mughlai","Indian","Chinese","Fast Food"],"avgRating":4.2,"parentId":"17529","avgRatingString":"4.2","totalRatingsString":"10K+","sla":{"deliveryTime":22,"lastMileTravel":0.6,"serviceability":"SERVICEABLE","slaString":"22 mins","lastMileTravelString":"0.6 km","iconType":"ICON_TYPE_EMPTY"},"availability":{"nextCloseTime":"2024-01-06 01:50:00","opened":true},"badges":{},"isOpen":true,"type":"F","badgesV2":{"entityBadges":{"imageBased":{},"textBased":{},"textExtendedBadges":{}}},"aggregatedDiscountInfoV3":{"header":"\u20B9120 OFF","subHeader":"ABOVE \u20B9199","discountTag":"FLAT DEAL"},"differentiatedUi":{"displayType":"ADS_UI_DISPLAY_TYPE_ENUM_DEFAULT","differentiatedUiMediaDetails":{"mediaType":"ADS_MEDIA_ENUM_IMAGE","lottie":{},"video":{}}},"reviewsSummary":{},"displayType":"RESTAURANT_DISPLAY_TYPE_DEFAULT","restaurantOfferPresentationInfo":{}},"analytics":{},"cta":{"link":"https://www.swiggy.com/restaurants/zam-zam-fast-food-alpana-cineplex-hamidia-road-bhopal-109939","type":"WEBLINK"}},{"info":{"id":"106685","name":"Jai Hind Bakery","cloudinaryImageId":"z6n6ffdtxksgdy05asxb","locality":"Mahadev Mandir Road","areaName":"Peer Gate Area","costForTwo":"\u20B9250 for two","cuisines":["Bakery","Sweets","Desserts","Fast Food"],"avgRating":4.4,"parentId":"108490","avgRatingString":"4.4","totalRatingsString":"1K+","sla":{"deliveryTime":21,"lastMileTravel":2.4,"serviceability":"SERVICEABLE","slaString":"21 mins","lastMileTravelString":"2.4 km","iconType":"ICON_TYPE_EMPTY"},"availability":{"nextCloseTime":"2024-01-05 22:00:00","opened":true},"badges":{},"isOpen":true,"type":"F","badgesV2":{"entityBadges":{"imageBased":{},"textBased":{},"textExtendedBadges":{}}},"aggregatedDiscountInfoV3":{"header":"\u20B9120 OFF","subHeader":"ABOVE \u20B9199","discountTag":"FLAT DEAL"},"differentiatedUi":{"displayType":"ADS_UI_DISPLAY_TYPE_ENUM_DEFAULT","differentiatedUiMediaDetails":{"mediaType":"ADS_MEDIA_ENUM_IMAGE","lottie":{},"video":{}}},"reviewsSummary":{},"displayType":"RESTAURANT_DISPLAY_TYPE_DEFAULT","restaurantOfferPresentationInfo":{}},"analytics":{},"cta":{"link":"https://www.swiggy.com/restaurants/jai-hind-bakery-mahadev-mandir-road-peer-gate-area-bhopal-106685","type":"WEBLINK"}},{"info":{"id":"324628","name":"Sharma Bhojnalaya - Bus Stand Jawahar Chowk","cloudinaryImageId":"1641ddd08c8c4a31e86522328f5f8465","locality":"Jawahar Chowk","areaName":"Jawahar Chowk","costForTwo":"\u20B9200 for two","cuisines":["Thalis","North Indian","Indian","Fast Food","Chinese"],"avgRating":4.2,"veg":true,"parentId":"469434","avgRatingString":"4.2","totalRatingsString":"1K+","sla":{"deliveryTime":30,"lastMileTravel":3.6,"serviceability":"SERVICEABLE","slaString":"30 mins","lastMileTravelString":"3.6 km","iconType":"ICON_TYPE_EMPTY"},"availability":{"nextCloseTime":"2024-01-05 23:45:00","opened":true},"badges":{"imageBadges":[{"imageId":"v1690360529/Ratnesh_Badges/Only_on_swiggy_badge_4x.png","description":"OnlyOnSwiggy"},{"imageId":"v1695133679/badges/Pure_Veg111.png","description":"pureveg"}]},"isOpen":true,"type":"F","badgesV2":{"entityBadges":{"imageBased":{"badgeObject":[{"attributes":{"description":"OnlyOnSwiggy","imageId":"v1690360529/Ratnesh_Badges/Only_on_swiggy_badge_4x.png"}},{"attributes":{"description":"pureveg","imageId":"v1695133679/badges/Pure_Veg111.png"}}]},"textBased":{},"textExtendedBadges":{}}},"aggregatedDiscountInfoV3":{"header":"\u20B9120 OFF","subHeader":"ABOVE \u20B9199","discountTag":"FLAT DEAL"},"differentiatedUi":{"displayType":"ADS_UI_DISPLAY_TYPE_ENUM_DEFAULT","differentiatedUiMediaDetails":{"mediaType":"ADS_MEDIA_ENUM_IMAGE","lottie":{},"video":{}}},"reviewsSummary":{},"displayType":"RESTAURANT_DISPLAY_TYPE_DEFAULT","restaurantOfferPresentationInfo":{}},"analytics":{},"cta":{"link":"https://www.swiggy.com/restaurants/sharma-bhojnalaya-bus-stand-jawahar-chowk-jawahar-chowk-bhopal-324628","type":"WEBLINK"}},{"info":{"id":"465563","name":"Jaffa Shawarma","cloudinaryImageId":"cuyb4edjcdbxaarwqdxy","locality":"Kilol Park","areaName":"TT Nagar","costForTwo":"\u20B9150 for two","cuisines":["Fast Food","Lebanese","Desserts","Street Food","Beverages"],"avgRating":4.4,"parentId":"247840","avgRatingString":"4.4","totalRatingsString":"100+","sla":{"deliveryTime":25,"lastMileTravel":3.6,"serviceability":"SERVICEABLE","slaString":"25 mins","lastMileTravelString":"3.6 km","iconType":"ICON_TYPE_EMPTY"},"availability":{"nextCloseTime":"2024-01-05 23:30:00","opened":true},"badges":{},"isOpen":true,"type":"F","badgesV2":{"entityBadges":{"imageBased":{},"textBased":{},"textExtendedBadges":{}}},"aggregatedDiscountInfoV3":{"header":"\u20B9120 OFF","subHeader":"ABOVE \u20B9199","discountTag":"FLAT DEAL"},"differentiatedUi":{"displayType":"ADS_UI_DISPLAY_TYPE_ENUM_DEFAULT","differentiatedUiMediaDetails":{"mediaType":"ADS_MEDIA_ENUM_IMAGE","lottie":{},"video":{}}},"reviewsSummary":{},"displayType":"RESTAURANT_DISPLAY_TYPE_DEFAULT","restaurantOfferPresentationInfo":{}},"analytics":{},"cta":{"link":"https://www.swiggy.com/restaurants/jaffa-shawarma-kilol-park-tt-nagar-bhopal-465563","type":"WEBLINK"}},{"info":{"id":"113424","name":"Sagar Gaire","cloudinaryImageId":"fjguivcigogxmk3d8f7u","locality":"Housing Board Complex","areaName":"Ashoka Garden","costForTwo":"\u20B9300 for two","cuisines":["Snacks","North Indian","Chinese","South Indian"],"avgRating":4.2,"veg":true,"parentId":"7049","avgRatingString":"4.2","totalRatingsString":"5K+","sla":{"deliveryTime":24,"lastMileTravel":2.1,"serviceability":"SERVICEABLE","slaString":"24 mins","lastMileTravelString":"2.1 km","iconType":"ICON_TYPE_EMPTY"},"availability":{"nextCloseTime":"2024-01-05 23:55:00","opened":true},"badges":{"imageBadges":[{"imageId":"v1695133679/badges/Pure_Veg111.png","description":"pureveg"}]},"isOpen":true,"type":"F","badgesV2":{"entityBadges":{"imageBased":{"badgeObject":[{"attributes":{"description":"pureveg","imageId":"v1695133679/badges/Pure_Veg111.png"}}]},"textBased":{},"textExtendedBadges":{}}},"aggregatedDiscountInfoV3":{"header":"\u20B9120 OFF","subHeader":"ABOVE \u20B9199","discountTag":"FLAT DEAL"},"differentiatedUi":{"displayType":"ADS_UI_DISPLAY_TYPE_ENUM_DEFAULT","differentiatedUiMediaDetails":{"mediaType":"ADS_MEDIA_ENUM_IMAGE","lottie":{},"video":{}}},"reviewsSummary":{},"displayType":"RESTAURANT_DISPLAY_TYPE_DEFAULT","restaurantOfferPresentationInfo":{}},"analytics":{},"cta":{"link":"https://www.swiggy.com/restaurants/sagar-gaire-housing-board-complex-ashoka-garden-bhopal-113424","type":"WEBLINK"}},{"info":{"id":"412415","name":"Kwality Walls Frozen Dessert and Ice Cream Shop","cloudinaryImageId":"vcr5dpkinauiilhouz9v","locality":"Meenakshi Complex","areaName":"Idgah Hills","costForTwo":"\u20B9300 for two","cuisines":["Desserts","Ice Cream","Ice Cream Cakes"],"avgRating":4.6,"veg":true,"parentId":"582","avgRatingString":"4.6","totalRatingsString":"100+","sla":{"deliveryTime":27,"lastMileTravel":4.2,"serviceability":"SERVICEABLE","slaString":"27 mins","lastMileTravelString":"4.2 km","iconType":"ICON_TYPE_EMPTY"},"availability":{"nextCloseTime":"2024-01-05 23:30:00","opened":true},"badges":{},"isOpen":true,"type":"F","badgesV2":{"entityBadges":{"imageBased":{},"textBased":{},"textExtendedBadges":{}}},"aggregatedDiscountInfoV3":{"header":"50% OFF","subHeader":"UPTO \u20B9100"},"differentiatedUi":{"displayType":"ADS_UI_DISPLAY_TYPE_ENUM_DEFAULT","differentiatedUiMediaDetails":{"mediaType":"ADS_MEDIA_ENUM_IMAGE","lottie":{},"video":{}}},"reviewsSummary":{},"displayType":"RESTAURANT_DISPLAY_TYPE_DEFAULT","restaurantOfferPresentationInfo":{}},"analytics":{},"cta":{"link":"https://www.swiggy.com/restaurants/kwality-walls-frozen-dessert-and-ice-cream-shop-meenakshi-complex-idgah-hills-bhopal-412415","type":"WEBLINK"}},{"info":{"id":"585068","name":"Shri Anjani Veg Bhojnalaya","cloudinaryImageId":"zzvff4q1lnybc2qogo1n","locality":"Ganesh Galaxy","areaName":"Ayodhya Bypass","costForTwo":"\u20B9250 for two","cuisines":["Thalis","North Indian","Indian","Fast Food","Chinese"],"avgRating":4,"parentId":"350139","avgRatingString":"4.0","totalRatingsString":"1K+","sla":{"deliveryTime":36,"lastMileTravel":7.7,"serviceability":"SERVICEABLE","slaString":"36 mins","lastMileTravelString":"7.7 km","iconType":"ICON_TYPE_EMPTY"},"availability":{"nextCloseTime":"2024-01-05 23:00:00","opened":true},"badges":{},"isOpen":true,"type":"F","badgesV2":{"entityBadges":{"imageBased":{},"textBased":{},"textExtendedBadges":{}}},"aggregatedDiscountInfoV3":{"header":"\u20B9120 OFF","subHeader":"ABOVE \u20B9199","discountTag":"FLAT DEAL"},"differentiatedUi":{"displayType":"ADS_UI_DISPLAY_TYPE_ENUM_DEFAULT","differentiatedUiMediaDetails":{"mediaType":"ADS_MEDIA_ENUM_IMAGE","lottie":{},"video":{}}},"reviewsSummary":{},"displayType":"RESTAURANT_DISPLAY_TYPE_DEFAULT","restaurantOfferPresentationInfo":{}},"analytics":{},"cta":{"link":"https://www.swiggy.com/restaurants/shri-anjani-veg-bhojnalaya-ganesh-galaxy-ayodhya-bypass-bhopal-585068","type":"WEBLINK"}},{"info":{"id":"92816","name":"Idli & More","cloudinaryImageId":"yti6qdbmzawis39mjfni","locality":"Arera Colony","areaName":"Arera Colony","costForTwo":"\u20B9250 for two","cuisines":["South Indian","Chinese","Italian","Beverages","Indian"],"avgRating":4.4,"veg":true,"parentId":"371274","avgRatingString":"4.4","totalRatingsString":"5K+","sla":{"deliveryTime":33,"lastMileTravel":6.9,"serviceability":"SERVICEABLE","slaString":"33 mins","lastMileTravelString":"6.9 km","iconType":"ICON_TYPE_EMPTY"},"availability":{"nextCloseTime":"2024-01-05 23:00:00","opened":true},"badges":{"imageBadges":[{"imageId":"v1695133679/badges/Pure_Veg111.png","description":"pureveg"}]},"isOpen":true,"type":"F","badgesV2":{"entityBadges":{"imageBased":{"badgeObject":[{"attributes":{"description":"pureveg","imageId":"v1695133679/badges/Pure_Veg111.png"}}]},"textBased":{},"textExtendedBadges":{}}},"aggregatedDiscountInfoV3":{"header":"\u20B9120 OFF","subHeader":"ABOVE \u20B9199","discountTag":"FLAT DEAL"},"differentiatedUi":{"displayType":"ADS_UI_DISPLAY_TYPE_ENUM_DEFAULT","differentiatedUiMediaDetails":{"mediaType":"ADS_MEDIA_ENUM_IMAGE","lottie":{},"video":{}}},"reviewsSummary":{},"displayType":"RESTAURANT_DISPLAY_TYPE_DEFAULT","restaurantOfferPresentationInfo":{}},"analytics":{},"cta":{"link":"https://www.swiggy.com/restaurants/idli-and-more-arera-colony-bhopal-92816","type":"WEBLINK"}},{"info":{"id":"107521","name":"Mughal Darbar","cloudinaryImageId":"eeeylbrnliju2q8oqykq","locality":"Railway Colony","areaName":"Nadra Bus Stand","costForTwo":"\u20B9250 for two","cuisines":["Mughlai","Tandoor","Snacks","Fast Food"],"avgRating":4,"parentId":"8892","avgRatingString":"4.0","totalRatingsString":"10K+","sla":{"deliveryTime":22,"lastMileTravel":1.3,"serviceability":"SERVICEABLE","slaString":"22 mins","lastMileTravelString":"1.3 km","iconType":"ICON_TYPE_EMPTY"},"availability":{"nextCloseTime":"2024-01-06 05:00:00","opened":true},"badges":{},"isOpen":true,"type":"F","badgesV2":{"entityBadges":{"imageBased":{},"textBased":{},"textExtendedBadges":{}}},"aggregatedDiscountInfoV3":{"header":"\u20B9120 OFF","subHeader":"ABOVE \u20B9199","discountTag":"FLAT DEAL"},"differentiatedUi":{"displayType":"ADS_UI_DISPLAY_TYPE_ENUM_DEFAULT","differentiatedUiMediaDetails":{"mediaType":"ADS_MEDIA_ENUM_IMAGE","lottie":{},"video":{}}},"reviewsSummary":{},"displayType":"RESTAURANT_DISPLAY_TYPE_DEFAULT","restaurantOfferPresentationInfo":{}},"analytics":{},"cta":{"link":"https://www.swiggy.com/restaurants/mughal-darbar-railway-colony-nadra-bus-stand-bhopal-107521","type":"WEBLINK"}},{"info":{"id":"101060","name":"Khan Sahab","cloudinaryImageId":"71e33044a09be6e4ca50cf4eca0977c5","locality":"Hamidia Road","areaName":"Model Ground","costForTwo":"\u20B9200 for two","cuisines":["Mughlai","Biryani","Ramzan Special","North Indian","Lucknowi","Tandoor"],"avgRating":4.3,"parentId":"7054","avgRatingString":"4.3","totalRatingsString":"1K+","sla":{"deliveryTime":27,"lastMileTravel":2.6,"serviceability":"SERVICEABLE","slaString":"27 mins","lastMileTravelString":"2.6 km","iconType":"ICON_TYPE_EMPTY"},"availability":{"nextCloseTime":"2024-01-05 23:59:00","opened":true},"badges":{},"isOpen":true,"type":"F","badgesV2":{"entityBadges":{"imageBased":{},"textBased":{},"textExtendedBadges":{}}},"aggregatedDiscountInfoV3":{"header":"\u20B9120 OFF","subHeader":"ABOVE \u20B9199","discountTag":"FLAT DEAL"},"differentiatedUi":{"displayType":"ADS_UI_DISPLAY_TYPE_ENUM_DEFAULT","differentiatedUiMediaDetails":{"mediaType":"ADS_MEDIA_ENUM_IMAGE","lottie":{},"video":{}}},"reviewsSummary":{},"displayType":"RESTAURANT_DISPLAY_TYPE_DEFAULT","restaurantOfferPresentationInfo":{}},"analytics":{},"cta":{"link":"https://www.swiggy.com/restaurants/khan-sahab-hamidia-road-model-ground-bhopal-101060","type":"WEBLINK"}},{"info":{"id":"557933","name":"Bake N Shake","cloudinaryImageId":"ogej1e2xxku5bhfafdcw","locality":"TT Nagar","areaName":"Rangmahal Cineplex","costForTwo":"\u20B9350 for two","cuisines":["Beverages","Snacks","Chinese","Fast Food","Bakery","Desserts","Continental","Pizzas","Pastas"],"avgRating":4.5,"parentId":"7053","avgRatingString":"4.5","totalRatingsString":"500+","sla":{"deliveryTime":26,"lastMileTravel":4,"serviceability":"SERVICEABLE","slaString":"26 mins","lastMileTravelString":"4.0 km","iconType":"ICON_TYPE_EMPTY"},"availability":{"nextCloseTime":"2024-01-05 22:45:00","opened":true},"badges":{},"isOpen":true,"type":"F","badgesV2":{"entityBadges":{"imageBased":{},"textBased":{},"textExtendedBadges":{}}},"aggregatedDiscountInfoV3":{"header":"\u20B9120 OFF","subHeader":"ABOVE \u20B9199","discountTag":"FLAT DEAL"},"differentiatedUi":{"displayType":"ADS_UI_DISPLAY_TYPE_ENUM_DEFAULT","differentiatedUiMediaDetails":{"mediaType":"ADS_MEDIA_ENUM_IMAGE","lottie":{},"video":{}}},"reviewsSummary":{},"displayType":"RESTAURANT_DISPLAY_TYPE_DEFAULT","restaurantOfferPresentationInfo":{}},"analytics":{},"cta":{"link":"https://www.swiggy.com/restaurants/bake-n-shake-tt-nagar-rangmahal-cineplex-bhopal-557933","type":"WEBLINK"}},{"info":{"id":"77016","name":"Bapu Ki Kutia","cloudinaryImageId":"rumvx9pfc56tbez1wovn","locality":"Roshanpura Square","areaName":"Roshanpura Square","costForTwo":"\u20B9300 for two","cuisines":["North Indian","Chinese","Beverages","Thalis","Snacks","Fast Food","South Indian"],"avgRating":4.4,"veg":true,"parentId":"7065","avgRatingString":"4.4","totalRatingsString":"10K+","sla":{"deliveryTime":24,"lastMileTravel":3.6,"serviceability":"SERVICEABLE","slaString":"24 mins","lastMileTravelString":"3.6 km","iconType":"ICON_TYPE_EMPTY"},"availability":{"nextCloseTime":"2024-01-05 23:00:00","opened":true},"badges":{"imageBadges":[{"imageId":"v1695133679/badges/Pure_Veg111.png","description":"pureveg"}]},"isOpen":true,"type":"F","badgesV2":{"entityBadges":{"imageBased":{"badgeObject":[{"attributes":{"description":"pureveg","imageId":"v1695133679/badges/Pure_Veg111.png"}}]},"textBased":{},"textExtendedBadges":{}}},"aggregatedDiscountInfoV3":{"header":"\u20B9120 OFF","subHeader":"ABOVE \u20B9199","discountTag":"FLAT DEAL"},"differentiatedUi":{"displayType":"ADS_UI_DISPLAY_TYPE_ENUM_DEFAULT","differentiatedUiMediaDetails":{"mediaType":"ADS_MEDIA_ENUM_IMAGE","lottie":{},"video":{}}},"reviewsSummary":{},"displayType":"RESTAURANT_DISPLAY_TYPE_DEFAULT","restaurantOfferPresentationInfo":{}},"analytics":{},"cta":{"link":"https://www.swiggy.com/restaurants/bapu-ki-kutia-roshanpura-square-bhopal-77016","type":"WEBLINK"}}],"theme":"Restaurant_Group_WebView_SEO_PB_Theme","widgetType":"WIDGET_TYPE_POPULAR_BRANDS","style":{"width":{"type":"TYPE_RELATIVE","value":0.41111112,"reference":"RELATIVE_DIMENSION_REFERENCE_DEVICE_WIDTH"},"height":{"type":"TYPE_RELATIVE","value":0.7027027,"reference":"RELATIVE_DIMENSION_REFERENCE_WIDTH"},"layoutAlignment":"LAYOUT_ALIGNMENT_LEFT"},"collectionId":"84124"}}}}},{"card":{"card":{"@type":"type.googleapis.com/swiggy.seo.widgets.v1.BasicContent","title":"Restaurants with online food delivery in Bhopal","id":"popular_restaurants_title"}}},{"card":{"card":{"@type":"type.googleapis.com/swiggy.gandalf.widgets.v2.InlineViewFilterSortWidget","sortConfigs":[{"key":"relevance","title":"Relevance (Default)","selected":true,"defaultSelection":true},{"key":"deliveryTimeAsc","title":"Delivery Time"},{"key":"modelBasedRatingDesc","title":"Rating"},{"key":"costForTwoAsc","title":"Cost: Low to High"},{"key":"costForTwoDesc","title":"Cost: High to Low"}],"restaurantCount":1416,"facetList":[{"label":"Delivery Time","id":"deliveryTime","selection":"SELECT_TYPE_MULTISELECT","facetInfo":[{"label":"Fast Delivery","id":"deliveryTimefacetquery1","analytics":{},"openFilter":true}],"viewType":"VIEW_TYPE_HALF_CARD","subLabel":"Filter by"},{"label":"Cuisines","id":"catalog_cuisines","selection":"SELECT_TYPE_MULTISELECT","facetInfo":[{"label":"American","id":"query_american","analytics":{},"openFilter":true},{"label":"Arabian","id":"query_arabian","analytics":{},"openFilter":true},{"label":"Asian","id":"query_asian","analytics":{},"openFilter":true},{"label":"Bakery","id":"query_bakery","analytics":{},"openFilter":true},{"label":"Bangladeshi","id":"query_bangladeshi","analytics":{},"openFilter":true},{"label":"Barbecue","id":"query_barbecue","analytics":{},"openFilter":true},{"label":"Bengali","id":"query_bengali","analytics":{},"openFilter":true},{"label":"Beverages","id":"query_beverages","analytics":{},"openFilter":true},{"label":"Bihari","id":"query_bihari","analytics":{},"openFilter":true},{"label":"Biryani","id":"query_biryani","analytics":{},"openFilter":true},{"label":"Burgers","id":"query_burgers","analytics":{},"openFilter":true},{"label":"Cafe","id":"query_cafe","analytics":{},"openFilter":true},{"label":"Cakes and Pastries","id":"query_cakes_and_pastries","analytics":{},"openFilter":true},{"label":"Chaat","id":"query_chaat","analytics":{},"openFilter":true},{"label":"Chinese","id":"query_chinese","analytics":{},"openFilter":true},{"label":"Combo","id":"query_combo","analytics":{},"openFilter":true},{"label":"Continental","id":"query_continental","analytics":{},"openFilter":true},{"label":"Desserts","id":"query_desserts","analytics":{},"openFilter":true},{"label":"European","id":"query_european","analytics":{},"openFilter":true},{"label":"Fast Food","id":"query_fast_food","analytics":{},"openFilter":true},{"label":"French","id":"query_french","analytics":{},"openFilter":true},{"label":"Goan","id":"query_goan","analytics":{},"openFilter":true},{"label":"Grill","id":"query_grill","analytics":{},"openFilter":true},{"label":"Gujarati","id":"query_gujarati","analytics":{},"openFilter":true},{"label":"Healthy Food","id":"query_healthy_food","analytics":{},"openFilter":true},{"label":"Home Food","id":"query_home_food","analytics":{},"openFilter":true},{"label":"Hyderabadi","id":"query_hyderabadi","analytics":{},"openFilter":true},{"label":"Ice Cream","id":"query_ice_cream","analytics":{},"openFilter":true},{"label":"Ice Cream Cakes","id":"query_ice_cream_cakes","analytics":{},"openFilter":true},{"label":"Indian","id":"query_indian","analytics":{},"openFilter":true},{"label":"Italian","id":"query_italian","analytics":{},"openFilter":true},{"label":"Italian-American","id":"query_italian-american","analytics":{},"openFilter":true},{"label":"Jain","id":"query_jain","analytics":{},"openFilter":true},{"label":"Japanese","id":"query_japanese","analytics":{},"openFilter":true},{"label":"Juices","id":"query_juices","analytics":{},"openFilter":true},{"label":"Kebabs","id":"query_kebabs","analytics":{},"openFilter":true},{"label":"Keto","id":"query_keto","analytics":{},"openFilter":true},{"label":"Lebanese","id":"query_lebanese","analytics":{},"openFilter":true},{"label":"Lucknowi","id":"query_lucknowi","analytics":{},"openFilter":true},{"label":"Maharashtrian","id":"query_maharashtrian","analytics":{},"openFilter":true},{"label":"Meat","id":"query_meat","analytics":{},"openFilter":true},{"label":"Mediterranean","id":"query_mediterranean","analytics":{},"openFilter":true},{"label":"Mexican","id":"query_mexican","analytics":{},"openFilter":true},{"label":"Middle Eastern","id":"query_middle_eastern","analytics":{},"openFilter":true},{"label":"Momos","id":"query_momos","analytics":{},"openFilter":true},{"label":"Mughlai","id":"query_mughlai","analytics":{},"openFilter":true},{"label":"North Indian","id":"query_north_indian","analytics":{},"openFilter":true},{"label":"Oriental","id":"query_oriental","analytics":{},"openFilter":true},{"label":"Paan","id":"query_paan","analytics":{},"openFilter":true},{"label":"Pan-Asian","id":"query_pan-asian","analytics":{},"openFilter":true},{"label":"Pastas","id":"query_pastas","analytics":{},"openFilter":true},{"label":"Pizzas","id":"query_pizzas","analytics":{},"openFilter":true},{"label":"Punjabi","id":"query_punjabi","analytics":{},"openFilter":true},{"label":"Rajasthani","id":"query_rajasthani","analytics":{},"openFilter":true},{"label":"Ramzan Special","id":"query_ramzan_special","analytics":{},"openFilter":true},{"label":"Rolls & Wraps","id":"query_rolls_&_wraps","analytics":{},"openFilter":true},{"label":"Salads","id":"query_salads","analytics":{},"openFilter":true},{"label":"Seafood","id":"query_seafood","analytics":{},"openFilter":true},{"label":"Sindhi","id":"query_sindhi","analytics":{},"openFilter":true},{"label":"Snacks","id":"query_snacks","analytics":{},"openFilter":true},{"label":"South Indian","id":"query_south_indian","analytics":{},"openFilter":true},{"label":"Spanish","id":"query_spanish","analytics":{},"openFilter":true},{"label":"Street Food","id":"query_street_food","analytics":{},"openFilter":true},{"label":"Sweets","id":"query_sweets","analytics":{},"openFilter":true},{"label":"Tandoor","id":"query_tandoor","analytics":{},"openFilter":true},{"label":"Thai","id":"query_thai","analytics":{},"openFilter":true},{"label":"Thalis","id":"query_thalis","analytics":{},"openFilter":true},{"label":"Tibetan","id":"query_tibetan","analytics":{},"openFilter":true},{"label":"Waffle","id":"query_waffle","analytics":{},"openFilter":true}],"viewType":"VIEW_TYPE_HALF_CARD","canSearch":true,"subLabel":"Filter by cuisine","openFilter":true},{"label":"Explore","id":"explore","selection":"SELECT_TYPE_MULTISELECT","facetInfo":[{"label":"New on Swiggy","id":"newfacetquery1","analytics":{},"openFilter":true}],"viewType":"VIEW_TYPE_HALF_CARD"},{"label":"Ratings","id":"rating","selection":"SELECT_TYPE_MULTISELECT","facetInfo":[{"label":"Ratings 4.5+","id":"ratingfacetquery3","analytics":{}},{"label":"Ratings 4.0+","id":"ratingfacetquery4","analytics":{},"openFilter":true},{"label":"Ratings 3.5+","id":"ratingfacetquery5","analytics":{}}],"viewType":"VIEW_TYPE_HALF_CARD","subLabel":"Filter by"},{"label":"Veg/Non-Veg","id":"isVeg","selection":"SELECT_TYPE_SINGLESELECT","facetInfo":[{"label":"Pure Veg","id":"isVegfacetquery2","analytics":{},"openFilter":true},{"label":"Non Veg","id":"isVegfacetquery3","analytics":{}}],"viewType":"VIEW_TYPE_FLATTENED","subLabel":"Filter by"},{"label":"Offers","id":"restaurantOfferMultiTd","selection":"SELECT_TYPE_SINGLESELECT","facetInfo":[{"label":"Offers","id":"restaurantOfferMultiTdfacetquery3","analytics":{},"openFilter":true}],"viewType":"VIEW_TYPE_FLATTENED","subLabel":"Restaurants with"},{"label":"Cost for two","id":"costForTwo","selection":"SELECT_TYPE_MULTISELECT","facetInfo":[{"label":"Rs. 300-Rs. 600","id":"costForTwofacetquery3","analytics":{},"openFilter":true},{"label":"Greater than Rs. 600","id":"costForTwofacetquery4","analytics":{}},{"label":"Less than Rs. 300","id":"costForTwofacetquery5","analytics":{},"openFilter":true}],"viewType":"VIEW_TYPE_HALF_CARD","subLabel":"Filter by"}]}}},{"card":{"card":{"@type":"type.googleapis.com/swiggy.gandalf.widgets.v2.GridWidget","layout":{"columns":4},"id":"restaurant_grid_listing","gridElements":{"infoWithStyle":{"@type":"type.googleapis.com/swiggy.presentation.food.v2.FavouriteRestaurantInfoWithStyle","restaurants":[{"info":{"id":"101997","name":"Rajhans Restaurant & Thali (Ghora Nikkas)","cloudinaryImageId":"aipwx1svepzdvsreuszq","locality":"Mandir Kamali Road","areaName":"Ghora Nakkas","costForTwo":"\u20B9250 for two","cuisines":["Burgers","Chinese","Rolls & Wraps","Pizzas","Thalis","North Indian"],"avgRating":4.1,"veg":true,"parentId":"165649","avgRatingString":"4.1","totalRatingsString":"5K+","sla":{"deliveryTime":24,"lastMileTravel":1.8,"serviceability":"SERVICEABLE","slaString":"24 mins","lastMileTravelString":"1.8 km","iconType":"ICON_TYPE_EMPTY"},"availability":{"nextCloseTime":"2024-01-05 23:00:00","opened":true},"badges":{"imageBadges":[{"imageId":"v1690360529/Ratnesh_Badges/Only_on_swiggy_badge_4x.png","description":"OnlyOnSwiggy"},{"imageId":"v1695133679/badges/Pure_Veg111.png","description":"pureveg"}]},"isOpen":true,"type":"F","badgesV2":{"entityBadges":{"imageBased":{"badgeObject":[{"attributes":{"description":"OnlyOnSwiggy","imageId":"v1690360529/Ratnesh_Badges/Only_on_swiggy_badge_4x.png"}},{"attributes":{"description":"pureveg","imageId":"v1695133679/badges/Pure_Veg111.png"}}]},"textBased":{},"textExtendedBadges":{}}},"aggregatedDiscountInfoV3":{"header":"\u20B9120 OFF","subHeader":"ABOVE \u20B9199","discountTag":"FLAT DEAL"},"orderabilityCommunication":{"title":{},"subTitle":{},"message":{},"customIcon":{}},"differentiatedUi":{"displayType":"ADS_UI_DISPLAY_TYPE_ENUM_DEFAULT","differentiatedUiMediaDetails":{"mediaType":"ADS_MEDIA_ENUM_IMAGE","lottie":{},"video":{}}},"reviewsSummary":{},"displayType":"RESTAURANT_DISPLAY_TYPE_DEFAULT","restaurantOfferPresentationInfo":{}},"analytics":{"context":"seo-data-a40d0e6f-57e1-4b5c-885c-716dff69cff7"},"cta":{"link":"https://www.swiggy.com/restaurants/rajhans-restaurant-and-thali-ghora-nikkas-mandir-kamali-road-ghora-nakkas-bhopal-101997","text":"RESTAURANT_MENU","type":"WEBLINK"},"widgetId":"collectionV5RestaurantListWidget_SimRestoRelevance_food_seo"},{"info":{"id":"101059","name":"Manohar Dairy and Restaurant","cloudinaryImageId":"yhnrql8wxgu8sgqjczos","locality":"Hamidia Road","areaName":"Hamidia Road","costForTwo":"\u20B9300 for two","cuisines":["Sweets","Beverages","Desserts","Snacks","Chaat","Street Food","Chinese","Bakery","North Indian","South Indian"],"avgRating":4.6,"veg":true,"parentId":"7052","avgRatingString":"4.6","totalRatingsString":"10K+","sla":{"deliveryTime":19,"lastMileTravel":0.8,"serviceability":"SERVICEABLE","slaString":"19 mins","lastMileTravelString":"0.8 km","iconType":"ICON_TYPE_EMPTY"},"availability":{"nextCloseTime":"2024-01-05 22:30:00","opened":true},"badges":{"imageBadges":[{"imageId":"v1695133679/badges/Pure_Veg111.png","description":"pureveg"}]},"isOpen":true,"type":"F","badgesV2":{"entityBadges":{"imageBased":{"badgeObject":[{"attributes":{"description":"pureveg","imageId":"v1695133679/badges/Pure_Veg111.png"}}]},"textBased":{},"textExtendedBadges":{}}},"aggregatedDiscountInfoV3":{"header":"\u20B9120 OFF","subHeader":"ABOVE \u20B9199","discountTag":"FLAT DEAL"},"orderabilityCommunication":{"title":{},"subTitle":{},"message":{},"customIcon":{}},"differentiatedUi":{"displayType":"ADS_UI_DISPLAY_TYPE_ENUM_DEFAULT","differentiatedUiMediaDetails":{"mediaType":"ADS_MEDIA_ENUM_IMAGE","lottie":{},"video":{}}},"reviewsSummary":{},"displayType":"RESTAURANT_DISPLAY_TYPE_DEFAULT","restaurantOfferPresentationInfo":{}},"analytics":{"context":"seo-data-a40d0e6f-57e1-4b5c-885c-716dff69cff7"},"cta":{"link":"https://www.swiggy.com/restaurants/manohar-dairy-and-restaurant-hamidia-road-bhopal-101059","text":"RESTAURANT_MENU","type":"WEBLINK"},"widgetId":"collectionV5RestaurantListWidget_SimRestoRelevance_food_seo"},{"info":{"id":"419988","name":"99 Rotiwala-Bhopal","cloudinaryImageId":"brteodziq28wckphkg4f","areaName":"Subhash Nagar","costForTwo":"\u20B9250 for two","cuisines":["North Indian","Indian","Thalis","Biryani","Tandoor"],"avgRating":3.8,"veg":true,"parentId":"233857","avgRatingString":"3.8","totalRatingsString":"1K+","sla":{"deliveryTime":34,"lastMileTravel":3,"serviceability":"SERVICEABLE","slaString":"34 mins","lastMileTravelString":"3.0 km","iconType":"ICON_TYPE_EMPTY"},"availability":{"nextCloseTime":"2024-01-06 04:00:00","opened":true},"badges":{"imageBadges":[{"imageId":"v1695133679/badges/Pure_Veg111.png","description":"pureveg"}]},"isOpen":true,"type":"F","badgesV2":{"entityBadges":{"imageBased":{"badgeObject":[{"attributes":{"description":"pureveg","imageId":"v1695133679/badges/Pure_Veg111.png"}}]},"textBased":{},"textExtendedBadges":{}}},"aggregatedDiscountInfoV3":{"header":"\u20B9120 OFF","subHeader":"ABOVE \u20B9199","discountTag":"FLAT DEAL"},"orderabilityCommunication":{"title":{},"subTitle":{},"message":{},"customIcon":{}},"differentiatedUi":{"displayType":"ADS_UI_DISPLAY_TYPE_ENUM_DEFAULT","differentiatedUiMediaDetails":{"mediaType":"ADS_MEDIA_ENUM_IMAGE","lottie":{},"video":{}}},"reviewsSummary":{},"displayType":"RESTAURANT_DISPLAY_TYPE_DEFAULT","restaurantOfferPresentationInfo":{}},"analytics":{"context":"seo-data-a40d0e6f-57e1-4b5c-885c-716dff69cff7"},"cta":{"link":"https://www.swiggy.com/restaurants/99-rotiwala-bhopal-subhash-nagar-bhopal-419988","text":"RESTAURANT_MENU","type":"WEBLINK"},"widgetId":"collectionV5RestaurantListWidget_SimRestoRelevance_food_seo"},{"info":{"id":"76688","name":"Guptaji Shakahari Bhojnalay","cloudinaryImageId":"jb9iyqwlhuyxyvb6zwnz","areaName":"MP Nagar","costForTwo":"\u20B9250 for two","cuisines":["Thalis","North Indian","Indian","Fast Food","Chinese"],"avgRating":4,"veg":true,"parentId":"91882","avgRatingString":"4.0","totalRatingsString":"10K+","sla":{"deliveryTime":32,"lastMileTravel":4.9,"serviceability":"SERVICEABLE","slaString":"32 mins","lastMileTravelString":"4.9 km","iconType":"ICON_TYPE_EMPTY"},"availability":{"nextCloseTime":"2024-01-05 23:30:00","opened":true},"badges":{},"isOpen":true,"type":"F","badgesV2":{"entityBadges":{"imageBased":{},"textBased":{},"textExtendedBadges":{}}},"aggregatedDiscountInfoV3":{"header":"\u20B9120 OFF","subHeader":"ABOVE \u20B9199","discountTag":"FLAT DEAL"},"orderabilityCommunication":{"title":{},"subTitle":{},"message":{},"customIcon":{}},"differentiatedUi":{"displayType":"ADS_UI_DISPLAY_TYPE_ENUM_DEFAULT","differentiatedUiMediaDetails":{"mediaType":"ADS_MEDIA_ENUM_IMAGE","lottie":{},"video":{}}},"reviewsSummary":{},"displayType":"RESTAURANT_DISPLAY_TYPE_DEFAULT","restaurantOfferPresentationInfo":{}},"analytics":{"context":"seo-data-a40d0e6f-57e1-4b5c-885c-716dff69cff7"},"cta":{"link":"https://www.swiggy.com/restaurants/guptaji-shakahari-bhojnalay-mp-nagar-bhopal-76688","text":"RESTAURANT_MENU","type":"WEBLINK"},"widgetId":"collectionV5RestaurantListWidget_SimRestoRelevance_food_seo"},{"info":{"id":"78535","name":"Mahadev Bhojnalay","cloudinaryImageId":"u3mgfammbsuwfpkaeeif","locality":"Maharana Pratap Nagar","areaName":"MP Nagar","costForTwo":"\u20B9250 for two","cuisines":["Thalis","North Indian","Indian","Fast Food","Chinese"],"avgRating":3.9,"veg":true,"parentId":"129506","avgRatingString":"3.9","totalRatingsString":"10K+","sla":{"deliveryTime":31,"lastMileTravel":4.9,"serviceability":"SERVICEABLE","slaString":"31 mins","lastMileTravelString":"4.9 km","iconType":"ICON_TYPE_EMPTY"},"availability":{"nextCloseTime":"2024-01-05 23:55:00","opened":true},"badges":{},"isOpen":true,"type":"F","badgesV2":{"entityBadges":{"imageBased":{},"textBased":{},"textExtendedBadges":{}}},"aggregatedDiscountInfoV3":{"header":"\u20B9120 OFF","subHeader":"ABOVE \u20B9199","discountTag":"FLAT DEAL"},"orderabilityCommunication":{"title":{},"subTitle":{},"message":{},"customIcon":{}},"differentiatedUi":{"displayType":"ADS_UI_DISPLAY_TYPE_ENUM_DEFAULT","differentiatedUiMediaDetails":{"mediaType":"ADS_MEDIA_ENUM_IMAGE","lottie":{},"video":{}}},"reviewsSummary":{},"displayType":"RESTAURANT_DISPLAY_TYPE_DEFAULT","restaurantOfferPresentationInfo":{}},"analytics":{"context":"seo-data-a40d0e6f-57e1-4b5c-885c-716dff69cff7"},"cta":{"link":"https://www.swiggy.com/restaurants/mahadev-bhojnalay-maharana-pratap-nagar-mp-nagar-bhopal-78535","text":"RESTAURANT_MENU","type":"WEBLINK"},"widgetId":"collectionV5RestaurantListWidget_SimRestoRelevance_food_seo"},{"info":{"id":"613953","name":"Sharma & Vishnu Fast Food","cloudinaryImageId":"xtjilr4hbushoxflffjm","locality":"Manohar Dairy","areaName":"Hamidia Road","costForTwo":"\u20B9300 for two","cuisines":["Indian","Snacks","Mughlai","Beverages","Fast Food"],"avgRating":4.3,"veg":true,"parentId":"182026","avgRatingString":"4.3","totalRatingsString":"500+","sla":{"deliveryTime":24,"lastMileTravel":1.7,"serviceability":"SERVICEABLE","slaString":"24 mins","lastMileTravelString":"1.7 km","iconType":"ICON_TYPE_EMPTY"},"availability":{"nextCloseTime":"2024-01-05 23:25:00","opened":true},"badges":{"imageBadges":[{"imageId":"v1695133679/badges/Pure_Veg111.png","description":"pureveg"}]},"isOpen":true,"type":"F","badgesV2":{"entityBadges":{"imageBased":{"badgeObject":[{"attributes":{"description":"pureveg","imageId":"v1695133679/badges/Pure_Veg111.png"}}]},"textBased":{},"textExtendedBadges":{}}},"aggregatedDiscountInfoV3":{"header":"\u20B9120 OFF","subHeader":"ABOVE \u20B9199","discountTag":"FLAT DEAL"},"orderabilityCommunication":{"title":{},"subTitle":{},"message":{},"customIcon":{}},"differentiatedUi":{"displayType":"ADS_UI_DISPLAY_TYPE_ENUM_DEFAULT","differentiatedUiMediaDetails":{"mediaType":"ADS_MEDIA_ENUM_IMAGE","lottie":{},"video":{}}},"reviewsSummary":{},"displayType":"RESTAURANT_DISPLAY_TYPE_DEFAULT","restaurantOfferPresentationInfo":{}},"analytics":{"context":"seo-data-a40d0e6f-57e1-4b5c-885c-716dff69cff7"},"cta":{"link":"https://www.swiggy.com/restaurants/sharma-and-vishnu-fast-food-manohar-dairy-hamidia-road-bhopal-613953","text":"RESTAURANT_MENU","type":"WEBLINK"},"widgetId":"collectionV5RestaurantListWidget_SimRestoRelevance_food_seo"},{"info":{"id":"783279","name":"Veer Ji Malai Chaap Wale","cloudinaryImageId":"49385719f2089935cc2e1a3fc977bbc8","locality":"Indrapuri Raisen Road","areaName":"Piplani","costForTwo":"\u20B9300 for two","cuisines":["North Indian","Tandoor","Snacks","Rolls & Wraps","Burgers","Biryani","Chinese","Beverages"],"avgRating":3.4,"veg":true,"parentId":"12056","avgRatingString":"3.4","totalRatingsString":"10+","sla":{"deliveryTime":29,"lastMileTravel":5.6,"serviceability":"SERVICEABLE","slaString":"29 mins","lastMileTravelString":"5.6 km","iconType":"ICON_TYPE_EMPTY"},"availability":{"nextCloseTime":"2024-01-05 23:00:00","opened":true},"badges":{},"isOpen":true,"type":"F","badgesV2":{"entityBadges":{"imageBased":{},"textBased":{},"textExtendedBadges":{}}},"aggregatedDiscountInfoV3":{"header":"\u20B9120 OFF","subHeader":"ABOVE \u20B9199","discountTag":"FLAT DEAL"},"orderabilityCommunication":{"title":{},"subTitle":{},"message":{},"customIcon":{}},"differentiatedUi":{"displayType":"ADS_UI_DISPLAY_TYPE_ENUM_DEFAULT","differentiatedUiMediaDetails":{"mediaType":"ADS_MEDIA_ENUM_IMAGE","lottie":{},"video":{}}},"reviewsSummary":{},"displayType":"RESTAURANT_DISPLAY_TYPE_DEFAULT","isNewlyOnboarded":true,"restaurantOfferPresentationInfo":{}},"analytics":{"context":"seo-data-a40d0e6f-57e1-4b5c-885c-716dff69cff7"},"cta":{"link":"https://www.swiggy.com/restaurants/veer-ji-malai-chaap-wale-indrapuri-raisen-road-piplani-bhopal-783279","text":"RESTAURANT_MENU","type":"WEBLINK"},"widgetId":"collectionV5RestaurantListWidget_SimRestoRelevance_food_seo"},{"info":{"id":"523122","name":"Domino\'s Pizza","cloudinaryImageId":"qajboygqykfvdlzo07gb","locality":"Maharaja Complex","areaName":"Peer Gate Area","costForTwo":"\u20B9400 for two","cuisines":["Pizzas","Italian","Pastas","Desserts"],"avgRating":4.1,"parentId":"2456","avgRatingString":"4.1","totalRatingsString":"100+","sla":{"deliveryTime":25,"serviceability":"SERVICEABLE","slaString":"25 mins","iconType":"ICON_TYPE_EMPTY"},"availability":{"nextCloseTime":"2024-01-05 23:55:00","opened":true},"badges":{},"isOpen":true,"type":"F","badgesV2":{"entityBadges":{"imageBased":{},"textBased":{},"textExtendedBadges":{}}},"aggregatedDiscountInfoV3":{"header":"\u20B9120 OFF","subHeader":"ABOVE \u20B9199","discountTag":"FLAT DEAL"},"orderabilityCommunication":{"title":{},"subTitle":{},"message":{},"customIcon":{}},"differentiatedUi":{"displayType":"ADS_UI_DISPLAY_TYPE_ENUM_DEFAULT","differentiatedUiMediaDetails":{"mediaType":"ADS_MEDIA_ENUM_IMAGE","lottie":{},"video":{}}},"reviewsSummary":{},"displayType":"RESTAURANT_DISPLAY_TYPE_DEFAULT","restaurantOfferPresentationInfo":{}},"analytics":{"context":"seo-data-a40d0e6f-57e1-4b5c-885c-716dff69cff7"},"cta":{"link":"https://www.swiggy.com/restaurants/dominos-pizza-maharaja-complex-peer-gate-area-bhopal-523122","text":"RESTAURANT_MENU","type":"WEBLINK"},"widgetId":"collectionV5RestaurantListWidget_SimRestoRelevance_food_seo"},{"info":{"id":"109939","name":"Zam Zam Fast Food","cloudinaryImageId":"kuisp5xx9tcutesp33yf","locality":"Alpana Cineplex","areaName":"Hamidia Road","costForTwo":"\u20B9250 for two","cuisines":["North Indian","Mughlai","Indian","Chinese","Fast Food"],"avgRating":4.2,"parentId":"17529","avgRatingString":"4.2","totalRatingsString":"10K+","sla":{"deliveryTime":22,"lastMileTravel":0.6,"serviceability":"SERVICEABLE","slaString":"22 mins","lastMileTravelString":"0.6 km","iconType":"ICON_TYPE_EMPTY"},"availability":{"nextCloseTime":"2024-01-06 01:50:00","opened":true},"badges":{},"isOpen":true,"type":"F","badgesV2":{"entityBadges":{"imageBased":{},"textBased":{},"textExtendedBadges":{}}},"aggregatedDiscountInfoV3":{"header":"\u20B9120 OFF","subHeader":"ABOVE \u20B9199","discountTag":"FLAT DEAL"},"orderabilityCommunication":{"title":{},"subTitle":{},"message":{},"customIcon":{}},"differentiatedUi":{"displayType":"ADS_UI_DISPLAY_TYPE_ENUM_DEFAULT","differentiatedUiMediaDetails":{"mediaType":"ADS_MEDIA_ENUM_IMAGE","lottie":{},"video":{}}},"reviewsSummary":{},"displayType":"RESTAURANT_DISPLAY_TYPE_DEFAULT","restaurantOfferPresentationInfo":{}},"analytics":{"context":"seo-data-a40d0e6f-57e1-4b5c-885c-716dff69cff7"},"cta":{"link":"https://www.swiggy.com/restaurants/zam-zam-fast-food-alpana-cineplex-hamidia-road-bhopal-109939","text":"RESTAURANT_MENU","type":"WEBLINK"},"widgetId":"collectionV5RestaurantListWidget_SimRestoRelevance_food_seo"}],"theme":"SeoRestaurantListingGridWidget"}}}}}]}');
+
+},{}],"9R1Eu":[function(require,module,exports) {
 var $parcel$ReactRefreshHelpers$5b98 = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
 var prevRefreshReg = window.$RefreshReg$;
 var prevRefreshSig = window.$RefreshSig$;
@@ -36222,7 +37018,7 @@ exports.default = useRestaurantMenu;
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react":"21dqq","./constants":"hB8jg","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru"}],"fE8zq":[function(require,module,exports) {
+},{"react":"21dqq","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru","./constants":"hB8jg"}],"fE8zq":[function(require,module,exports) {
 var $parcel$ReactRefreshHelpers$f363 = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
 var prevRefreshReg = window.$RefreshReg$;
 var prevRefreshSig = window.$RefreshSig$;
@@ -41101,7 +41897,7 @@ $RefreshReg$(_c, "Search");
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru","react-router-dom":"9xmpe"}],"e2h3k":[function(require,module,exports) {
+},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","react-router-dom":"9xmpe","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru"}],"e2h3k":[function(require,module,exports) {
 module.exports = require("29af259fc1f64a1c")(require("4c1094922790cfac").getBundleURL("aXMci") + "Grocery.c52c2ad2.js" + "?" + Date.now()).catch((err)=>{
     delete module.bundle.cache[module.id];
     throw err;
